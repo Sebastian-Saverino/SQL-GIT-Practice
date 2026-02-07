@@ -23,4 +23,12 @@ SELECT MAX(amount) FROM payment; Similar to how I used the ORDER BY to see the l
 SELECT SUM(amount) FROM payment; This got the toatl amount of money made from movies sold. Powerful query, as this is a basis of starting to understand better metrics.
 SELECT MIN/MAX(length)
 SELECT title, MAX(length) AS length FROM film GROUP BY title ORDER BY length DESC; We are now expanding on what I have shown earlier, with this query you can see the films that are the longest in length by ordering by and grouping by our film and length. This also highlights the use of creating alias, which are very powerful tools.
-**Use HAVING (Delete tommorow)** 
+SELECT COUNT(language_id), title
+FROM film
+GROUP BY title
+HAVING COUNT(language_id) < 1;
+This is what I was trying to write, I wrote the query correctly. 
+SELECT payment_date, AVG(amount) FROM payment GROUP BY payment_date HAVING(AVG(amount)) > 5;
+I worked with HAVING today, and it was a little bit of a pain, but it was nice getting to work with the aggregate functions more, as there is a lot of power in that. 
+*Work with COUNT and HAVING delete tommorow*
+
