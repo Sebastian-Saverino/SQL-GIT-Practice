@@ -288,3 +288,99 @@ OR, NOT, BETWEEN, IN, LIKE, and IS NULL.
 Once those feel natural, moving into joins will make a lot more sense.
 
 ---
+
+ SELECT title, rating FROM film JOIN language ON film.language_id = language.language_id;
+
+SELECT * FROM city JOIN country on city.city_id = country.country_id;
+
+I wanted to see the city and countries next to each other as they are both in seperate tables
+
+SELECT customer.first_name, customer.last_name, rental.rental_date, rental.return_date FROM customer LEFT JOIN rental on rental.customer_id = customer.customer_id;
+
+SELECT 
+    c.first_name, 
+    c.last_name, 
+    r.rental_date, 
+    r.return_date
+FROM customer c
+LEFT JOIN rental r
+    ON r.customer_id = c.customer_id;
+
+
+I created this left join in the intent to see when someone rented out a dvd and as well when they would need to return it
+
+
+SELECT * FROM actor CROSS JOIN film_actor;
+This is me practicing me a CROSS JOIN to see all possible joins, this is not the greatest as this can give us an unessary amount of data.
+
+SELECT i.last_update, r.rental_date, r.customer_id, i.store_id FROM rental AS r RIGHT JOIN inventory AS i ON i.inventory_id = r.inventory_id;
+
+I wanted to practice a RIGHT JOIN and I felt this went well so that was nice, not too bad of a query chatgpt suggested I do a left join which makes total sense. As keeping the rentals so what physicallly out compared to the inventory makes plenty of sense.
+
+
+
+
+
+
+SELECT f.title, a.first_name, a.last_name FROM film AS f JOIN film_actor AS fm ON f.film_id = fm.film_id LEFT JOIN actor AS a ON fm.actor_id = a.actor_id;
+
+This is a muti join query and I'm proud of it, as this shows the actors in a movie, I can work on updating it a little more tommorow :)
+
+SELECT f.title, f.description, c.name FROM film AS f LEFT JOIN film_category AS fc ON f.film_id = fc.film_id JOIN category AS c ON fc.category_id = fc.category_id;
+
+Look into this tommorow
+
+ SELECT s.first_name, s.last_name, s.store_id, r.rental_id FROM staff AS s LEFT JOIN rental AS r ON s.staff_id = r.staff_id;
+
+I in fact feel like i'm cooking today as I wanted to compare the amount of movies sold by both Mike Hillyer and Jon Stephens
+
+So I created the first query to figure out the join portion such as figuring how to see the rentals that each person sold; then I followed this up with a count query to see how many rentals in told were sold
+
+ SELECT 
+    s.first_name,
+    s.last_name,
+    COUNT(r.rental_id) AS rental_count
+FROM staff AS s
+LEFT JOIN rental AS r
+ON s.staff_id = r.staff_id
+WHERE s.staff_id = 1 OR s.staff_id = 2
+GROUP BY s.first_name, s.last_name, s.staff_id;
+
+I added on to the orginal to see both staffs counts makinng it easier to see now I'm going to attempt to get the different between the rental counts
+
+
+SELECT 
+    MAX(rental_count) - MIN(rental_count) AS rental_difference
+FROM (
+    SELECT 
+        s.staff_id,
+        COUNT(r.rental_id) AS rental_count
+    FROM staff AS s
+    LEFT JOIN rental AS r
+        ON s.staff_id = r.staff_id
+    WHERE s.staff_id IN (1, 2)
+    GROUP BY s.staff_id
+) AS counts;
+
+
+
+WITH counts AS (
+    SELECT 
+        s.staff_id,
+        COUNT(r.rental_id) AS rental_count
+    FROM staff AS s
+    LEFT JOIN rental AS r
+        ON s.staff_id = r.staff_id
+    WHERE s.staff_id IN (1, 2)
+    GROUP BY s.staff_id
+)
+SELECT 
+    c1.rental_count AS staff_1_rentals,
+    c2.rental_count AS staff_2_rentals,
+    c1.rental_count - c2.rental_count AS difference
+FROM counts c1
+JOIN counts c2
+ON c1.staff_id = 1 AND c2.staff_id = 2;
+
+Shoutout chatgpt for this; I'm still working on my subquery skills but finding the difference between the staff is helpful as this can help decide who I want to give a bonus to if that makes since
+
