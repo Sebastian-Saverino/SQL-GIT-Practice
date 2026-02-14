@@ -384,3 +384,10 @@ ON c1.staff_id = 1 AND c2.staff_id = 2;
 
 Shoutout chatgpt for this; I'm still working on my subquery skills but finding the difference between the staff is helpful as this can help decide who I want to give a bonus to if that makes since
 
+SELECT s.first_name, s.last_name, st.store_id FROM staff AS s LEFT JOIN store AS st ON s.store_id = st.store_id;
+ first_name | last_name | store_id
+------------+-----------+----------
+ Mike       | Hillyer   |        1
+ Jon        | Stephens  |        2
+
+ this was a practice query just keep up my consistentiency, I enjoyed this as I'm to the point where joins are feeling easy, and it is rather exciting as I did this query even if it is very simple but no errors first try very quickly.
