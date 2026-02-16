@@ -391,3 +391,8 @@ SELECT s.first_name, s.last_name, st.store_id FROM staff AS s LEFT JOIN store AS
  Jon        | Stephens  |        2
 
  this was a practice query just keep up my consistentiency, I enjoyed this as I'm to the point where joins are feeling easy, and it is rather exciting as I did this query even if it is very simple but no errors first try very quickly.
+
+
+ I wanted to use concat as it fell through the cracks when working through 
+
+ SELECT CONCAT(first_name,' ',last_name) AS actor, last_update FROM actor;
