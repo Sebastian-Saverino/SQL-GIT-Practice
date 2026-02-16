@@ -396,3 +396,8 @@ SELECT s.first_name, s.last_name, st.store_id FROM staff AS s LEFT JOIN store AS
  I wanted to use concat as it fell through the cracks when working through 
 
  SELECT CONCAT(first_name,' ',last_name) AS actor, last_update FROM actor;
+
+
+ SELECT rating, LOWER(title) AS lower_name FROM film;
+ This is me starting my string functions
+ This is a simple use of lower and film these will go by quickly as they are simply but still need to be used.
