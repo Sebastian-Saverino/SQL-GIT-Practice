@@ -641,3 +641,63 @@ I wanted to see what each description began with.
 Surprisingly, they all started with “A” followed by an adjective.
 
 ---
+
+dvdrental=# SELECT
+dvdrental-#     DATE(rental_date) AS day,
+dvdrental-#     COUNT(*) AS rentals
+dvdrental-# FROM rental
+dvdrental-# GROUP BY day;
+
+
+Here is my query I used for rentals to see what days we had the most amount of rentals and additionally I used the \x to extend the view of the query making it a little easier to view with these longer queries
+
+
+
+SELECT
+    EXTRACT(MONTH FROM payment_date) AS month,
+    SUM(amount) AS revenue
+FROM payment
+GROUP BY month
+ORDER BY month;
+
+
+This is the query used in my notes but I felt it does a good job of adding business logic to the database 
+
+dvdrental=# SELECT EXTRACT(YEAR FROM create_date) AS creation_year FROM customer GROUP BY creation_year;
+-[ RECORD 1 ]-+-----
+creation_year | 2006
+
+
+dvdrental=# SELECT EXTRACT(MONTH FROM create_date) AS creation_year FROM customer GROUP BY creation_year;
+-[ RECORD 1 ]-+--
+creation_year | 2
+
+
+dvdrental=# SELECT EXTRACT(DAY FROM create_date) AS creation_year FROM customer GROUP BY creation_year;
+-[ RECORD 1 ]-+---
+creation_year | 14
+
+I used these two queries to see if I could better get a gage on if the create dates changes and sadly they don't
+
+dvdrental=# SELECT DISTINCT EXTRACT(YEAR FROM rental_date) AS rental_year, COUNT(customer_id) FROM rental GROUP BY rental_year ORDER BY rental_year;
+-[ RECORD 1 ]------
+rental_year | 2005
+count       | 15862
+-[ RECORD 2 ]------
+rental_year | 2006
+count       | 182
+
+I wanted to see which year had more rentals looks like we lose some of our data or a ton of different possiblies of why the data is not there
+
+SELECT DISTINCT EXTRACT(MONTH FROM rental_date) AS rental_month, COUNT(customer_id) FROM rental GROUP BY rental_month ORDER BY rental_month;
+
+
+dvdrental=# SELECT
+dvdrental-#     TO_CHAR(rental_date, 'Month YYYY') AS rental_period,
+dvdrental-#     COUNT(customer_id) AS rental_count
+dvdrental-# FROM rental
+dvdrental-# GROUP BY rental_period,
+dvdrental-#          DATE_TRUNC('month', rental_date)
+dvdrental-# ORDER BY DATE_TRUNC('month', rental_date);
+
+I wanted to learn how to view the actual name of the month and year opposed to just a month number as this is more digestable, I did use out help for this as I wasn't as famiilar with DATE_TRUNC to properly organize the data.
