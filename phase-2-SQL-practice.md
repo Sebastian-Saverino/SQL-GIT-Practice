@@ -2,6 +2,26 @@
 
 ## #1. Subqueries in WHERE
 
+SELECT customer_id, amount, (SELECT AVG(amount) FROM payment)
+FROM payment;
+
+I first started with a subquery in the SELECT portion.
+
+SELECT avg_amount.customer_id
+FROM (
+    SELECT customer_id, AVG(amount) AS avg_amount
+    FROM payment
+    GROUP BY customer_id
+) AS avg_amount;
+
+This is the idea of using a subquery in the FROM portion, a great way I saw this concept explained was like you create you're table using that subquery like how you filter data with sql then with it being in the FROM portion you can query your "table" you made using your outer query.
+
+SELECT customer_id, amount FROM payment WHERE customer_id IN(SELECT customer_id FROM payment WHERE amount < 10);
+
+This was me using the subquery in the WHERE this is defintely something I'm going to have to work a little bit more on for sure.
+
+When working with subqueries, it helps to split it up into two pieces, so I start with the inner query first, I then move to the outer query. When writing my queries I was thinking how does the outer query "speak" to the inner query
+
 Goal: Filter rows using results from another query.
 
 Practice:
@@ -122,7 +142,7 @@ Practice:
 
 You’re done with Phase 2 when you can comfortably:
 
-* [ ] Write subqueries in WHERE, SELECT, and FROM
+* [X] Write subqueries in WHERE, SELECT, and FROM
 * [ ] Replace subqueries with CTEs
 * [ ] Use EXISTS and NOT EXISTS
 * [ ] Combine datasets with UNION
