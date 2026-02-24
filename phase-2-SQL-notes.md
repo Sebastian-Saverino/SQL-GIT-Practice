@@ -44,7 +44,7 @@ Customers who made payments over $10:
 ```sql
 SELECT *
 FROM customer
-WHERE customer_id IN (
+WHERE customer_id NOT IN (
     SELECT customer_id
     FROM payment
     WHERE amount > 10
@@ -164,7 +164,7 @@ FROM cte_name;
 
 Find customers who spent more than $100.
 
-```sql
+```sql~
 WITH customer_spending AS (
     SELECT
         customer_id,
@@ -431,7 +431,7 @@ You get:
 
 ```
 Every payment row,
-plus customer totals
+plus customer totals`
 ```
 
 ---

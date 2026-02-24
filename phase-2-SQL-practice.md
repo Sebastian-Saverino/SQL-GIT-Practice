@@ -145,12 +145,81 @@ Replace complex subqueries with readable steps.
 ### Practice
 
 1. Single CTE with aggregation
+
+WITH movie_time AS (
+    SELECT
+        film_id, 
+        AVG(length) AS avg_movie_length
+    FROM film
+    GROUP BY film_id
+)
+SELECT * FROM movie_time WHERE avg_movie_length > 90;
+
+
+
+
 2. CTE with filtering
+
+WITH customer_density AS (
+    SELECT
+        a.address_id,
+        COUNT(a.district) AS district_density FROM customer AS c LEFT JOIN address AS a ON a.address_id = c.address_id
+        GROUP BY district_density
+)
+SELECT * FROM customer_density WHERE district = 'Alberta';
+
+This is what I had first above, I was struggling, I had the vision but I couldn't dial it down excacly, CTE's seems much easier to work with as they spell things out a little more 
+
+WITH customer_density AS (
+    SELECT
+        a.address_id,
+        a.district,
+        COUNT(c.customer_id) AS address_density
+    FROM address a
+    LEFT JOIN customer c
+        ON a.address_id = c.address_id
+    GROUP BY a.address_id, a.district
+)
+SELECT *
+FROM customer_density
+WHERE district = 'Alberta';
+
 3. CTE joined to another table
 4. Multiple CTEs in one query
+
+WITH customer_density AS (
+    SELECT
+        a.district,
+        COUNT(c.customer_id) AS district_density
+    FROM customer c
+    JOIN address a
+        ON c.address_id = a.address_id
+    GROUP BY a.district
+),
+alberta_only AS (
+    SELECT *
+    FROM customer_density
+    WHERE district = 'Alberta'
+)
+SELECT *
+FROM alberta_only;
+
+
+base = some_dataframe
+filtered = base[base["value"] > 10]
+print(filtered)
+
+I put this in a pandas format for python; I found creating cte is like creating a name variable then working off that
+
 5. CTE used for comparison logic
 
----
+WITH rent_cost AS (
+    SELECT title,
+    SUM(rental_rate) AS rent_total
+    FROM film AS f
+    HAVING BY rent_total
+)
+SELECT * FROM rent_cost;
 
 Everything above is strictly your material — just structured cleanly.
 
