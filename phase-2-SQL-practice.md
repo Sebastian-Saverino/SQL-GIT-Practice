@@ -221,7 +221,15 @@ WITH rent_cost AS (
 )
 SELECT * FROM rent_cost;
 
-Everything above is strictly your material — just structured cleanly.
+
+WITH rental_start AS(
+    SELECT rental_id, 
+    rental_date,
+    return_date
+    FROM rental
+    GROUP BY rental_id    
+ ) SELECT rental_date - return_date AS rental_differnce FROM rental_start;
+
 
 
 ## #5. EXISTS
