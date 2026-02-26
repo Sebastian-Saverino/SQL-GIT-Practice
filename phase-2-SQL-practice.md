@@ -1,29 +1,26 @@
-# Phase 2 SQL Outline (Query Progression)
-
-Got it — I’ll keep **only your content**, just organized and cleaned up.
+# SQL Notes — Subqueries + CTEs
 
 ---
 
-# #1. Subqueries in WHERE
+# 1) Subqueries in WHERE
 
-### Goal
-
+## Goal
 Filter rows using results from another query.
 
 ---
 
-### Subquery in SELECT (Initial Practice)
+## Subquery in SELECT (Initial Practice)
 
 ```sql
 SELECT customer_id, amount, (SELECT AVG(amount) FROM payment)
 FROM payment;
-```
+````
 
 I first started with a subquery in the `SELECT` portion.
 
 ---
 
-### Subquery in FROM (Derived Table Concept)
+## Subquery in FROM (Derived Table Concept)
 
 ```sql
 SELECT avg_amount.customer_id
@@ -44,7 +41,7 @@ It was explained in a way that made sense to me:
 
 ---
 
-### Subquery in WHERE
+## Subquery in WHERE
 
 ```sql
 SELECT customer_id, amount
@@ -61,7 +58,7 @@ This is definitely something I need to work more on.
 
 ---
 
-### Thought Process
+## Thought Process
 
 When working with subqueries:
 
@@ -86,29 +83,29 @@ WHERE language_id IN (
 );
 ```
 
----
-
 ### 2. Comparison with aggregate (e.g., `> AVG()`)
 
----
+* (blank)
 
 ### 3. `NOT IN` Subquery
 
----
+* (blank)
 
 ### 4. Subquery using `GROUP BY`
 
+* (blank)
+
 ---
 
-# #2. Subqueries in SELECT
+# 2) Subqueries in SELECT
 
-### Goal
+## Goal
 
 Add calculated values per row.
 
 ---
 
-### Practice
+## Practice
 
 1. Count-related subquery
 2. Sum-related subquery
@@ -117,15 +114,15 @@ Add calculated values per row.
 
 ---
 
-# #3. Subqueries in FROM (Derived Tables)
+# 3) Subqueries in FROM (Derived Tables)
 
-### Goal
+## Goal
 
 Treat a subquery like a temporary table.
 
 ---
 
-### Practice
+## Practice
 
 1. Aggregate subquery in `FROM`
 2. Filter results from derived table
@@ -134,42 +131,58 @@ Treat a subquery like a temporary table.
 
 ---
 
-# #4. Common Table Expressions (CTEs)
+# 4) Common Table Expressions (CTEs)
 
-### Goal
+## Goal
 
 Replace complex subqueries with readable steps.
 
 ---
 
-### Practice
+## Practice
 
-1. Single CTE with aggregation
+### 1. Single CTE with aggregation
 
+```sql
 WITH movie_time AS (
     SELECT
-        film_id, 
+        film_id,
         AVG(length) AS avg_movie_length
     FROM film
     GROUP BY film_id
 )
-SELECT * FROM movie_time WHERE avg_movie_length > 90;
+SELECT *
+FROM movie_time
+WHERE avg_movie_length > 90;
+```
 
+---
 
+### 2. CTE with filtering
 
+This is what I had first above, I was struggling, I had the vision but I couldn't dial it down exactly.
+CTEs seem much easier to work with as they spell things out a little more.
 
-2. CTE with filtering
+**First attempt (what you had):**
 
+```sql
 WITH customer_density AS (
     SELECT
         a.address_id,
-        COUNT(a.district) AS district_density FROM customer AS c LEFT JOIN address AS a ON a.address_id = c.address_id
-        GROUP BY district_density
+        COUNT(a.district) AS district_density
+    FROM customer AS c
+    LEFT JOIN address AS a
+        ON a.address_id = c.address_id
+    GROUP BY a.address_id
 )
-SELECT * FROM customer_density WHERE district = 'Alberta';
+SELECT *
+FROM customer_density
+WHERE district = 'Alberta';
+```
 
-This is what I had first above, I was struggling, I had the vision but I couldn't dial it down excacly, CTE's seems much easier to work with as they spell things out a little more 
+**Working version (your corrected one):**
 
+```sql
 WITH customer_density AS (
     SELECT
         a.address_id,
@@ -183,10 +196,19 @@ WITH customer_density AS (
 SELECT *
 FROM customer_density
 WHERE district = 'Alberta';
+```
 
-3. CTE joined to another table
-4. Multiple CTEs in one query
+---
 
+### 3. CTE joined to another table
+
+* (blank)
+
+---
+
+### 4. Multiple CTEs in one query
+
+```sql
 WITH customer_density AS (
     SELECT
         a.district,
@@ -203,32 +225,91 @@ alberta_only AS (
 )
 SELECT *
 FROM alberta_only;
+```
 
+I put this in a pandas format for python; I found creating CTE is like creating a name variable then working off that.
 
+```python
 base = some_dataframe
 filtered = base[base["value"] > 10]
 print(filtered)
+```
 
-I put this in a pandas format for python; I found creating cte is like creating a name variable then working off that
+---
 
-5. CTE used for comparison logic
+### 5. CTE used for comparison logic
 
+```sql
 WITH rent_cost AS (
-    SELECT title,
-    SUM(rental_rate) AS rent_total
+    SELECT
+        title,
+        SUM(rental_rate) AS rent_total
     FROM film AS f
-    HAVING BY rent_total
+    GROUP BY title
 )
-SELECT * FROM rent_cost;
+SELECT *
+FROM rent_cost;
+```
 
-
-WITH rental_start AS(
-    SELECT rental_id, 
-    rental_date,
-    return_date
+```sql
+WITH rental_start AS (
+    SELECT
+        rental_id,
+        rental_date,
+        return_date
     FROM rental
-    GROUP BY rental_id    
- ) SELECT rental_date - return_date AS rental_differnce FROM rental_start;
+    GROUP BY rental_id, rental_date, return_date
+)
+SELECT rental_date - return_date AS rental_differnce
+FROM rental_start;
+```
+
+---
+
+### Film category + title (CTE)
+
+```sql
+WITH film_type AS (
+    SELECT c.name, f.title
+    FROM film_category AS fc
+    RIGHT JOIN category AS c
+        ON fc.category_id = c.category_id
+    LEFT JOIN film AS f
+        ON fc.film_id = f.film_id
+)
+SELECT *
+FROM film_type;
+```
+
+I do understand that this can be done without a CTE.
+I do find CTEs to be great at showing my logic, it overall makes this process easier.
+
+---
+
+### Best store (favorite query)
+
+```sql
+WITH store_totals AS (
+    SELECT
+        SUM(p.amount) AS total_amount,
+        s.store_id
+    FROM payment AS p
+    JOIN staff AS s
+        ON p.staff_id = s.staff_id
+    GROUP BY s.store_id
+)
+SELECT *
+FROM store_totals
+ORDER BY total_amount DESC
+LIMIT 1;
+```
+
+This was probably my most favorite query to date.
+The first query grabbed the total amount and the store id so I can see which one was which, then it grouped the totals by the store_id.
+
+Then we used the select query to figure out the best store using `LIMIT 1`, which is the same idea of using page + offset pagination.
+
+
 
 
 
@@ -242,6 +323,31 @@ Practice:
 2. `NOT EXISTS`
 3. EXISTS with join condition
 4. EXISTS vs IN comparison queries
+
+
+SELECT *
+FROM customer c
+WHERE EXISTS (
+    SELECT 1
+    FROM rental r
+    WHERE r.customer_id = c.customer_id
+);
+
+SELECT title, length, rating FROM film AS f
+WHERE EXISTS (
+    SELECT 1
+    FROM language as l
+    WHERE f.language_id = l.language_id
+);
+
+Okay so after some reading EXISTS / NOT EXISTS act like a way does this bring back data or not. it is more performant then using IN and NOT IN.
+
+
+
+
+
+
+
 
 ---
 
@@ -302,8 +408,8 @@ Practice:
 You’re done with Phase 2 when you can comfortably:
 
 * [X] Write subqueries in WHERE, SELECT, and FROM
-* [ ] Replace subqueries with CTEs
-* [ ] Use EXISTS and NOT EXISTS
+* [X] Replace subqueries with CTEs
+* [X] Use EXISTS and NOT EXISTS
 * [ ] Combine datasets with UNION
 * [ ] Use window functions for totals and rankings
 * [ ] Calculate running totals and row differences
