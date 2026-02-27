@@ -296,6 +296,14 @@ UNION
 SELECT first_name FROM staff;
 ```
 
+
+
+SELECT employee_id, employee_name, 'Employee' AS job_title
+FROM employees
+UNION
+SELECT contractor_id, contractor_name, 'Contractor' AS job_title
+FROM contractors;
+
 ---
 
 ## UNION ALL
