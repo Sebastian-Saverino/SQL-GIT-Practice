@@ -355,6 +355,11 @@ Okay so after some reading EXISTS / NOT EXISTS act like a way does this bring ba
 
 Goal: Combine results from multiple queries.
 
+SELECT first_name, 'staff' AS customer_or_staff FROM staff UNION SELECT first_name, 'Customer' AS customer FROM customer;
+
+UNIONS seem simple enough, they kinda ignore the rules of a join and just combine all the specified data, i used the following union to combine all the staff and customers and see who is a staff and who is a customer.
+
+
 Practice:
 
 1. Basic `UNION`
