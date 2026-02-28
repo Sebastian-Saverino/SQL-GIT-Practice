@@ -360,6 +360,16 @@ SELECT first_name, 'staff' AS customer_or_staff FROM staff UNION SELECT first_na
 UNIONS seem simple enough, they kinda ignore the rules of a join and just combine all the specified data, i used the following union to combine all the staff and customers and see who is a staff and who is a customer.
 
 
+This is my query using UNION ALL it just UNIONs countries and cities, but keeps the duplicates with it being a UNION.
+
+SELECT city_id AS location_id, city AS location_name
+FROM city
+
+UNION ALL
+
+SELECT country_id AS location_id, country AS location_name
+FROM country;
+
 Practice:
 
 1. Basic `UNION`
