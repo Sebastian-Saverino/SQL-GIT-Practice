@@ -370,6 +370,22 @@ UNION ALL
 SELECT country_id AS location_id, country AS location_name
 FROM country;
 
+
+SELECT staff_id AS ids, first_name 
+FROM staff 
+WHERE first_name = 'Mike'
+
+UNION
+
+SELECT customer_id, first_name 
+FROM customer 
+WHERE first_name = 'Mike';
+
+
+I wanted to see all the Mikes in both the customer and staff tables, so I used the UNION function for this.
+
+
+
 Practice:
 
 1. Basic `UNION`
@@ -425,7 +441,7 @@ You’re done with Phase 2 when you can comfortably:
 * [X] Write subqueries in WHERE, SELECT, and FROM
 * [X] Replace subqueries with CTEs
 * [X] Use EXISTS and NOT EXISTS
-* [ ] Combine datasets with UNION
+* [X] Combine datasets with UNION
 * [ ] Use window functions for totals and rankings
 * [ ] Calculate running totals and row differences
 
