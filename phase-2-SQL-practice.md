@@ -400,13 +400,82 @@ Practice:
 
 Goal: Perform calculations across rows without grouping them away.
 
+
+
 Practice:
 
 1. `SUM() OVER (PARTITION BY)`
 2. `COUNT() OVER (PARTITION BY)`
 3. `AVG() OVER (PARTITION BY)`
 
+
+What is window functions?
+
+These are the idea of performing calculations on a subset of data wihtout losing the level of details of rows.
+
+
+Understanding group by first makes this a little easier to understand, why to use window functions. Group by aggregates data as we already know so for example we have hats and gloves and we see everytime someone buys one of those, when we aggregate those two things we lose the visual each order and we only see the group by sum up total.
+
+So with a window function you can see each row of data while also seeing that final result as in the sum total
+
+
+Window functions have the same fucntions as group by but have some other advanced functions as well.
+
+This is an example of a group by SELECT customer_id, SUM(amount) AS total_amount, payment_date FROM payment GROUP BY customer_id, payment_date;
+
+
+This is my first window function;
+SELECT customer_id, amount, SUM(amount)
+OVER(PARTITION BY customer_id) AS total_sales
+FROM payment;
+
+This query sees each amount the customer spent and there total in a column next to it, using the power of window fucntions.
+
+Window functions are awesome. They're more cool version of group by 
+
+PARTITION BY = GROUP BY but for when you're using a window functions
+
+Some window functions will not have a arg for example the rank function does not use a 
+
+Within a window function you can have
+
+Empty
+
+Column Name ()
+
+Number (2) OVER (ORDER BY pyament_date)
+
+Multiple Arguments LEAD(amount, 2, 10)
+
+Conditional Logic (So case statments)
+
+WINDOW FRAME
+
+This is the idea that a subset of rows within each window
+
+Window functions can be used toegehr with GROUP BY in the same query, only if the same columns are used.
+
+Just use group by for simple aggrations. 
+
+SELECT customer_id, SUM(amount) OVER(ORDER BY payment_date ROWS BETWEEN CURRENT ROW AND 2 FOLLOWING) FROM payment;
+
+
+This is my using ORDER BY to just order by the payment_date as well as using a window frame
+
 ---
+
+
+
+This is my most favorite query to date. As i did this with no help or anything just logic. 
+
+SELECT p.customer_id, c.first_name, c.last_name, c.email, SUM(p.amount) AS total_amount, 
+RANK() OVER(ORDER BY SUM(p.amount) DESC) AS best_spenders 
+FROM payment AS p
+LEFT JOIN customer AS c
+ON p.customer_id = c.customer_id
+GROUP BY p.customer_id, c.first_name, c.last_name, c.email;
+
+The idea is to rank our biggest spenders and to get there email and now we can see who to focus on in order to maintain customer loyalty. Big full circle moment with this query.
 
 ## #8. Window Functions – Ordering
 
