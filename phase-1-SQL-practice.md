@@ -1,3 +1,5 @@
+These notes are mine, built from my own journey of practicing SQL for one hour every day. I use AI to clean up and organize the writing so it’s easier to digest, but the learning and structure come from me. Every query included here was written using documentation only, unless I explicitly say I used additional resources. If I note “additional resources,” that means I used AI or another tool to help clarify a concept or confirm my understanding.
+
 # SELECT Fundamentals Progression
 
 ## Starting with SELECT queries
