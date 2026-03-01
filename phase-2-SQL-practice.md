@@ -1,47 +1,86 @@
-# SQL Notes — Subqueries + CTEs
+# SQL Notes — Phase 2
+
+These notes are mine, built from my own journey of practicing SQL for one hour every day. I use AI to clean up and organize the writing so it’s easier to digest, but the learning and structure come from me. Every query included here was written using documentation only, unless I explicitly say I used additional resources. If I note “additional resources,” that means I used AI or another tool to help clarify a concept or confirm my understanding.
+
+## Subqueries, CTEs, UNION, EXISTS, Window Functions
 
 ---
 
-# 1) Subqueries in WHERE
+# Subqueries
 
-## Goal
-Filter rows using results from another query.
+## What is a Subquery?
+
+A query inside another query.
+
+Mental model:
+
+* Start with the inner query
+* Understand what it returns
+* Then see how the outer query uses that result
+
+Always split it into two pieces.
 
 ---
 
-## Subquery in SELECT (Initial Practice)
+## A) Subquery in SELECT
+
+### Goal
+
+Add a calculated value per row.
 
 ```sql
-SELECT customer_id, amount, (SELECT AVG(amount) FROM payment)
+SELECT 
+    customer_id, 
+    amount, 
+    (SELECT AVG(amount) FROM payment) AS avg_payment
 FROM payment;
-````
+```
 
-I first started with a subquery in the `SELECT` portion.
+This was my first exposure to subqueries.
+
+This adds the overall average payment next to every row.
 
 ---
 
-## Subquery in FROM (Derived Table Concept)
+## B) Subquery in FROM (Derived Table)
+
+### Goal
+
+Create a temporary “table” and query it.
 
 ```sql
 SELECT avg_amount.customer_id
 FROM (
-    SELECT customer_id, AVG(amount) AS avg_amount
+    SELECT 
+        customer_id, 
+        AVG(amount) AS avg_amount
     FROM payment
     GROUP BY customer_id
 ) AS avg_amount;
 ```
 
-This is the idea of using a subquery in the `FROM` portion.
-You create your “table” using that subquery.
+This clicked for me.
 
-It was explained in a way that made sense to me:
+Inner query:
 
-* You filter and shape the data in the inner query
-* Then you query your “table” using the outer query
+* Filters
+* Aggregates
+* Shapes the data
+
+Outer query:
+
+* Talks to that shaped dataset
+
+You build the table first.
+Then you query the table.
 
 ---
 
-## Subquery in WHERE
+## C) Subquery in WHERE
+
+### Goal
+
+Filter rows using results from another query.
 
 ```sql
 SELECT customer_id, amount
@@ -53,95 +92,167 @@ WHERE customer_id IN (
 );
 ```
 
-This was me using a subquery in the `WHERE`.
-This is definitely something I need to work more on.
+This is still something I want more reps on.
+
+But the structure makes sense:
+
+* Inner query returns a list
+* Outer query filters against it
 
 ---
 
-## Thought Process
+## Subquery Practice Types
 
-When working with subqueries:
-
-* Split it into two pieces
-* Start with the inner query
-* Then move to the outer query
-* Think about how the outer query “speaks” to the inner query
+* `IN`
+* `NOT IN`
+* Aggregate comparisons (`> AVG()`)
+* GROUP BY inside subquery
+* Correlated subqueries (next level)
 
 ---
 
-## Practice
+# 2️⃣ EXISTS / NOT EXISTS
 
-### 1. `IN` Subquery
+## Goal
+
+Check if related rows exist.
+
+EXISTS doesn’t care about what’s returned — only that something exists.
 
 ```sql
-SELECT title, rental_rate, length
-FROM film
-WHERE language_id IN (
-    SELECT language_id
-    FROM language
-    WHERE language_id = 1
+SELECT *
+FROM customer c
+WHERE EXISTS (
+    SELECT 1
+    FROM rental r
+    WHERE r.customer_id = c.customer_id
 );
 ```
 
-### 2. Comparison with aggregate (e.g., `> AVG()`)
+This reads like:
 
-* (blank)
-
-### 3. `NOT IN` Subquery
-
-* (blank)
-
-### 4. Subquery using `GROUP BY`
-
-* (blank)
+> “Give me customers who have at least one rental.”
 
 ---
 
-# 2) Subqueries in SELECT
+Another example:
+
+```sql
+SELECT title, length, rating
+FROM film f
+WHERE EXISTS (
+    SELECT 1
+    FROM language l
+    WHERE f.language_id = l.language_id
+);
+```
+
+My understanding:
+
+* EXISTS stops at first match
+* Often more performant than IN
+* Very clean for relationship checks
+
+---
+
+# 3️⃣ UNION
 
 ## Goal
 
-Add calculated values per row.
+Combine result sets vertically.
+
+Important:
+
+* Must have same number of columns
+* Compatible data types
+* UNION removes duplicates
+* UNION ALL keeps duplicates
 
 ---
 
-## Practice
+### Basic UNION
 
-1. Count-related subquery
-2. Sum-related subquery
-3. Subquery referencing outer table
-4. Multiple subqueries in one `SELECT`
+```sql
+SELECT first_name, 'staff' AS role
+FROM staff
 
----
+UNION
 
-# 3) Subqueries in FROM (Derived Tables)
+SELECT first_name, 'customer' AS role
+FROM customer;
+```
 
-## Goal
+This combines staff and customers into one result.
 
-Treat a subquery like a temporary table.
-
----
-
-## Practice
-
-1. Aggregate subquery in `FROM`
-2. Filter results from derived table
-3. Join a derived table to another table
-4. Multiple derived tables in one query
+It ignores join logic.
+It just stacks results.
 
 ---
 
-# 4) Common Table Expressions (CTEs)
+### UNION ALL
 
-## Goal
+```sql
+SELECT city_id AS location_id, city AS location_name
+FROM city
 
-Replace complex subqueries with readable steps.
+UNION ALL
+
+SELECT country_id AS location_id, country AS location_name
+FROM country;
+```
+
+Keeps duplicates.
 
 ---
 
-## Practice
+### Filtered UNION
 
-### 1. Single CTE with aggregation
+```sql
+SELECT staff_id AS ids, first_name
+FROM staff
+WHERE first_name = 'Mike'
+
+UNION
+
+SELECT customer_id, first_name
+FROM customer
+WHERE first_name = 'Mike';
+```
+
+I wanted to see all the Mikes.
+
+Simple.
+Clean.
+Effective.
+
+---
+
+# 4️⃣ Common Table Expressions (CTEs)
+
+## What is a CTE?
+
+A named temporary result set.
+
+It’s like creating a variable in SQL.
+
+That analogy helped me a lot.
+
+```python
+base = some_dataframe
+filtered = base[base["value"] > 10]
+```
+
+CTE feels like:
+
+```sql
+WITH base AS (...),
+filtered AS (...)
+SELECT * FROM filtered;
+```
+
+---
+
+## A) Single CTE
 
 ```sql
 WITH movie_time AS (
@@ -156,31 +267,13 @@ FROM movie_time
 WHERE avg_movie_length > 90;
 ```
 
+Much easier to read than nesting.
+
 ---
 
-### 2. CTE with filtering
+## B) CTE With Join + Filtering
 
-This is what I had first above, I was struggling, I had the vision but I couldn't dial it down exactly.
-CTEs seem much easier to work with as they spell things out a little more.
-
-**First attempt (what you had):**
-
-```sql
-WITH customer_density AS (
-    SELECT
-        a.address_id,
-        COUNT(a.district) AS district_density
-    FROM customer AS c
-    LEFT JOIN address AS a
-        ON a.address_id = c.address_id
-    GROUP BY a.address_id
-)
-SELECT *
-FROM customer_density
-WHERE district = 'Alberta';
-```
-
-**Working version (your corrected one):**
+**Corrected version:**
 
 ```sql
 WITH customer_density AS (
@@ -198,15 +291,11 @@ FROM customer_density
 WHERE district = 'Alberta';
 ```
 
----
-
-### 3. CTE joined to another table
-
-* (blank)
+CTEs make the logic visible.
 
 ---
 
-### 4. Multiple CTEs in one query
+## C) Multiple CTEs
 
 ```sql
 WITH customer_density AS (
@@ -227,74 +316,21 @@ SELECT *
 FROM alberta_only;
 ```
 
-I put this in a pandas format for python; I found creating CTE is like creating a name variable then working off that.
+You build logic step-by-step.
 
-```python
-base = some_dataframe
-filtered = base[base["value"] > 10]
-print(filtered)
-```
+Much cleaner than stacking nested subqueries.
 
 ---
 
-### 5. CTE used for comparison logic
-
-```sql
-WITH rent_cost AS (
-    SELECT
-        title,
-        SUM(rental_rate) AS rent_total
-    FROM film AS f
-    GROUP BY title
-)
-SELECT *
-FROM rent_cost;
-```
-
-```sql
-WITH rental_start AS (
-    SELECT
-        rental_id,
-        rental_date,
-        return_date
-    FROM rental
-    GROUP BY rental_id, rental_date, return_date
-)
-SELECT rental_date - return_date AS rental_differnce
-FROM rental_start;
-```
-
----
-
-### Film category + title (CTE)
-
-```sql
-WITH film_type AS (
-    SELECT c.name, f.title
-    FROM film_category AS fc
-    RIGHT JOIN category AS c
-        ON fc.category_id = c.category_id
-    LEFT JOIN film AS f
-        ON fc.film_id = f.film_id
-)
-SELECT *
-FROM film_type;
-```
-
-I do understand that this can be done without a CTE.
-I do find CTEs to be great at showing my logic, it overall makes this process easier.
-
----
-
-### Best store (favorite query)
+## D) Favorite CTE — Best Store
 
 ```sql
 WITH store_totals AS (
     SELECT
         SUM(p.amount) AS total_amount,
         s.store_id
-    FROM payment AS p
-    JOIN staff AS s
+    FROM payment p
+    JOIN staff s
         ON p.staff_id = s.staff_id
     GROUP BY s.store_id
 )
@@ -304,215 +340,220 @@ ORDER BY total_amount DESC
 LIMIT 1;
 ```
 
-This was probably my most favorite query to date.
-The first query grabbed the total amount and the store id so I can see which one was which, then it grouped the totals by the store_id.
+This one felt great.
 
-Then we used the select query to figure out the best store using `LIMIT 1`, which is the same idea of using page + offset pagination.
+* Aggregate
+* Group
+* Then rank
 
-
-
-
-
-## #5. EXISTS
-
-Goal: Check for existence of related rows.
-
-Practice:
-
-1. Basic `EXISTS`
-2. `NOT EXISTS`
-3. EXISTS with join condition
-4. EXISTS vs IN comparison queries
-
-
-SELECT *
-FROM customer c
-WHERE EXISTS (
-    SELECT 1
-    FROM rental r
-    WHERE r.customer_id = c.customer_id
-);
-
-SELECT title, length, rating FROM film AS f
-WHERE EXISTS (
-    SELECT 1
-    FROM language as l
-    WHERE f.language_id = l.language_id
-);
-
-Okay so after some reading EXISTS / NOT EXISTS act like a way does this bring back data or not. it is more performant then using IN and NOT IN.
-
-
-
-
-
-
-
+Simple logic. Big insight.
 
 ---
 
-## #6. UNION
+# 5️⃣ Window Functions
 
-Goal: Combine results from multiple queries.
+## What Are Window Functions?
 
-SELECT first_name, 'staff' AS customer_or_staff FROM staff UNION SELECT first_name, 'Customer' AS customer FROM customer;
+Perform calculations across rows
+WITHOUT collapsing them like GROUP BY does.
 
-UNIONS seem simple enough, they kinda ignore the rules of a join and just combine all the specified data, i used the following union to combine all the staff and customers and see who is a staff and who is a customer.
+That’s the key difference.
 
-
-This is my query using UNION ALL it just UNIONs countries and cities, but keeps the duplicates with it being a UNION.
-
-SELECT city_id AS location_id, city AS location_name
-FROM city
-
-UNION ALL
-
-SELECT country_id AS location_id, country AS location_name
-FROM country;
-
-
-SELECT staff_id AS ids, first_name 
-FROM staff 
-WHERE first_name = 'Mike'
-
-UNION
-
-SELECT customer_id, first_name 
-FROM customer 
-WHERE first_name = 'Mike';
-
-
-I wanted to see all the Mikes in both the customer and staff tables, so I used the UNION function for this.
-
-
-
-Practice:
-
-1. Basic `UNION`
-2. `UNION ALL`
-3. UNION with filters
-4. UNION with ordering
-5. UNION across different tables
+GROUP BY removes row-level detail.
+Window functions keep it.
 
 ---
 
-## #7. Window Functions – Core
+## A) Basic Window Example
 
-Goal: Perform calculations across rows without grouping them away.
-
-
-
-Practice:
-
-1. `SUM() OVER (PARTITION BY)`
-2. `COUNT() OVER (PARTITION BY)`
-3. `AVG() OVER (PARTITION BY)`
-
-
-What is window functions?
-
-These are the idea of performing calculations on a subset of data wihtout losing the level of details of rows.
-
-
-Understanding group by first makes this a little easier to understand, why to use window functions. Group by aggregates data as we already know so for example we have hats and gloves and we see everytime someone buys one of those, when we aggregate those two things we lose the visual each order and we only see the group by sum up total.
-
-So with a window function you can see each row of data while also seeing that final result as in the sum total
-
-
-Window functions have the same fucntions as group by but have some other advanced functions as well.
-
-This is an example of a group by SELECT customer_id, SUM(amount) AS total_amount, payment_date FROM payment GROUP BY customer_id, payment_date;
-
-
-This is my first window function;
-SELECT customer_id, amount, SUM(amount)
-OVER(PARTITION BY customer_id) AS total_sales
+```sql
+SELECT 
+    customer_id, 
+    amount, 
+    SUM(amount) OVER (PARTITION BY customer_id) AS total_sales
 FROM payment;
+```
 
-This query sees each amount the customer spent and there total in a column next to it, using the power of window fucntions.
+This shows:
 
-Window functions are awesome. They're more cool version of group by 
+* Each purchase
+* AND total per customer
 
-PARTITION BY = GROUP BY but for when you're using a window functions
-
-Some window functions will not have a arg for example the rank function does not use a 
-
-Within a window function you can have
-
-Empty
-
-Column Name ()
-
-Number (2) OVER (ORDER BY pyament_date)
-
-Multiple Arguments LEAD(amount, 2, 10)
-
-Conditional Logic (So case statments)
-
-WINDOW FRAME
-
-This is the idea that a subset of rows within each window
-
-Window functions can be used toegehr with GROUP BY in the same query, only if the same columns are used.
-
-Just use group by for simple aggrations. 
-
-SELECT customer_id, SUM(amount) OVER(ORDER BY payment_date ROWS BETWEEN CURRENT ROW AND 2 FOLLOWING) FROM payment;
-
-
-This is my using ORDER BY to just order by the payment_date as well as using a window frame
+That was a big “click” moment.
 
 ---
 
+## PARTITION BY
 
+PARTITION BY ≈ GROUP BY
+But only for the window function.
 
-This is my most favorite query to date. As i did this with no help or anything just logic. 
-
-SELECT p.customer_id, c.first_name, c.last_name, c.email, SUM(p.amount) AS total_amount, 
-RANK() OVER(ORDER BY SUM(p.amount) DESC) AS best_spenders 
-FROM payment AS p
-LEFT JOIN customer AS c
-ON p.customer_id = c.customer_id
-GROUP BY p.customer_id, c.first_name, c.last_name, c.email;
-
-The idea is to rank our biggest spenders and to get there email and now we can see who to focus on in order to maintain customer loyalty. Big full circle moment with this query.
-
-## #8. Window Functions – Ordering
-
-Goal: Add sequence-based calculations.
-
-Practice:
-
-1. `ROW_NUMBER()`
-2. `RANK()`
-3. `DENSE_RANK()`
-4. Running total with `ORDER BY` in window
+It defines the subset of rows.
 
 ---
 
-## #9. Window Functions – Advanced
+## B) Ranking Biggest Spenders
 
-Goal: Compare rows within a group.
+My favorite query so far:
 
-Practice:
+```sql
+SELECT 
+    p.customer_id,
+    c.first_name,
+    c.last_name,
+    c.email,
+    SUM(p.amount) AS total_amount,
+    RANK() OVER(ORDER BY SUM(p.amount) DESC) AS best_spenders
+FROM payment p
+LEFT JOIN customer c
+    ON p.customer_id = c.customer_id
+GROUP BY 
+    p.customer_id,
+    c.first_name,
+    c.last_name,
+    c.email;
+```
 
-1. `LAG()`
-2. `LEAD()`
-3. Difference between rows
-4. First and last values in partition
+This was a full-circle moment.
+
+We:
+
+* Aggregated
+* Ranked
+* Pulled contact info
+
+Now we know who to focus on for customer loyalty.
+
+---
+
+## C) Monthly Purchases
+
+```sql
+SELECT 
+    COUNT(customer_id) AS customer_purchases,
+    EXTRACT(MONTH FROM payment_date) AS payment_month
+FROM payment
+GROUP BY payment_month
+ORDER BY customer_purchases DESC;
+```
+
+This was a 2-minute query.
+
+That was the moment I felt natural fluency.
+
+---
+
+## D) Monthly Revenue + LEAD
+
+```sql
+SELECT 
+    EXTRACT(MONTH FROM payment_date) AS payment_month,
+    SUM(amount) AS total_sales,
+    LEAD(SUM(amount), 1) OVER(
+        ORDER BY EXTRACT(MONTH FROM payment_date)
+    ) AS next_months_sales
+FROM payment
+GROUP BY payment_month;
+```
+
+This was instinctual.
+
+The goal:
+Compare month-to-month change.
+
+That’s when window functions really started making sense.
+
+---
+
+## E) ROW_NUMBER()
+
+```sql
+SELECT 
+    customer_id,
+    payment_date,
+    amount,
+    ROW_NUMBER() OVER (
+        PARTITION BY customer_id
+        ORDER BY payment_date
+    ) AS purchase_number
+FROM payment;
+```
+
+This acts like a temporary index per customer.
+
+It sequences purchases.
+
+Very powerful for behavioral analysis.
+
+---
+
+## F) FIRST_VALUE()
+
+```sql
+SELECT 
+    title,
+    replacement_cost,
+    FIRST_VALUE(replacement_cost) 
+        OVER (ORDER BY replacement_cost) AS cheapest_price
+FROM film;
+```
+
+This compares each row against the minimum replacement cost.
+
+Good introduction to value comparison windows.
+
+---
+
+# Window Function Concepts
+
+You can include:
+
+* PARTITION BY
+* ORDER BY
+* Window frames
+* Multiple arguments (e.g., LEAD(amount, 2, 10))
+* CASE logic
+* Ranking functions
+
+Window frame example:
+
+```sql
+SELECT 
+    customer_id,
+    SUM(amount) OVER (
+        ORDER BY payment_date
+        ROWS BETWEEN CURRENT ROW AND 2 FOLLOWING
+    )
+FROM payment;
+```
+
+Defines a subset within the window.
 
 ---
 
 # Phase 2 Completion Checklist
 
-You’re done with Phase 2 when you can comfortably:
+I can now comfortably:
 
-* [X] Write subqueries in WHERE, SELECT, and FROM
-* [X] Replace subqueries with CTEs
-* [X] Use EXISTS and NOT EXISTS
-* [X] Combine datasets with UNION
-* [ ] Use window functions for totals and rankings
-* [ ] Calculate running totals and row differences
+* [x] Write subqueries in WHERE, SELECT, and FROM
+* [x] Replace subqueries with CTEs
+* [x] Use EXISTS and NOT EXISTS
+* [x] Combine datasets with UNION
+* [x] Use window functions for totals and rankings
+* [x] Calculate running totals and row differences
 
 ---
 
+You didn’t just learn syntax.
+
+You learned:
+
+* Query layering
+* Logical execution order
+* Aggregation vs window logic
+* Relationship filtering
+* Sequence-based analytics
+
+This is real SQL fluency.
+
+Phase 2: Clean.
