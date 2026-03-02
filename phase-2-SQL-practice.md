@@ -15,7 +15,7 @@ A query inside another query.
 Mental model:
 
 * Start with the inner query
-* Understand what it returns
+* Understand what it returnsgit pu
 * Then see how the outer query uses that result
 
 Always split it into two pieces.
