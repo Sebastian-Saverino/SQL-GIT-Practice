@@ -1,240 +1,314 @@
-# Phase 3.0 — Schema Ownership & Data Modeling Rubric
-
-## Objective: Move from Query Writer → Schema Designer
-
-This phase is complete when you can design, modify, protect, and evolve a relational schema confidently without relying on examples.
+> Phase 3.0 — Logical Data Modeling & Schema Design
 
 ---
 
-# Section 1 — Relational Database Foundations (Structural Thinking)
+# Phase 3.0 — Logical Data Modeling & Schema Design
 
-### Goal: Understand how relational systems are structured before analytics.
+1. Name the two main types of databases in use today. 
+- SQL
+- NoSQL
+or 
+-OLAP
+-OLTP
+2. What type of data does an analytical database store? 
+-Static Data
+3. True or False: An operational database is used primarily in online transaction processing (OLTP) scenarios.
+True
+ 4. Name one of the branches of mathematics on which the relational model is based. 
+ Set theory and first-order predicate logic
+ 5. How does a relational database store data? 
+ Through relations (tables with stuff within them)
+ 6. Name the three types of relationships in a relational database. 
+ one to many
+ one to one
+ many to many
+ 7. How do you retrieve data in a relational database? 
+ SQL
+ 8. State two advantages of a relational database. 
+ Multi level data integrity through creating a tables and within the table have constraints set
+ 9. What is a relational database management system? 
+ This is a system that runs a relational database model such as mySQL for example
+ 10. True or False: Mobile devices are limited to gigabytes of storage.
+ False
+  11. State why database software companies have had a hard time implementing the relational database.
+  They don't properly plan out the database and we now live in an age where data is more then just text we have things like pdfs, videos, all kind of different data types.
+
+
+### Note
+
+For this practice, I used a mix of “what I need to know” combined with the SQL roadmap to structure this phase.
+
+For this section, I will be writing all notes myself.
+
+---
+
+## Objective: Move from Query Writer → Logical Schema Designer
+
+This phase is complete when I can:
+
+* Translate business requirements into relational structures
+* Define table grain clearly
+* Normalize and denormalize intentionally
+* Enforce integrity through constraints
+* Design schemas without relying on examples
+* Think in entities, relationships, and lifecycle
+
+This is not about performance.
+
+This is about structure.
+
+---
+
+# Section 1 — Relational Foundations (Conceptual & Logical Thinking)
+
+### Goal: Understand structure before implementation.
 
 ### Tasks
 
-* [ ] Write in your own words:
+* [ ] Define in my own words:
 
   * What is a relational database?
-  * What makes something “relational”?
-  * What is normalization?
-  * What problem does normalization solve?
+A relational database is a database where you have different tables that are connected to each other via relations or relationships. 
 
-* [ ] Create three tables:
 
-  1. Completely unnormalized
-  2. 1NF
-  3. 3NF
-     Compare them.
+  * What makes a model relational?
+  A relational model is a model where you have a table called clients and one called agent, this one agent can have many agents creating a relation between the two, this is the core idea of a relational model.
+  * What is an entity?
+  * What is an attribute?
+  * What is a relationship?
+  * What is cardinality?
 
-* [ ] Identify redundancy in a poorly designed table.
+* [ ] Explain:
 
-* [ ] Refactor that table into normalized form.
+  * 1:1 relationships
+  * 1:N relationships
+  * N:M relationships
+  * How N:M is resolved in relational systems
 
-* [ ] Explain tradeoffs between normalization and denormalization.
+* [ ] Define:
 
-* [ ] Explain OLTP vs OLAP.
+  * Primary key
+  * Foreign key
+  * Candidate key
+  * Surrogate key
+  * Natural key
 
-* [ ] Identify which schema style fits which workload.
+* [ ] Explain normalization:
 
-You should feel the tension between clean modeling and analytics performance.
+  * 1NF
+  * 2NF
+  * 3NF
+  * Why over-normalization can hurt analytics
 
 ---
 
-# Section 2 — DDL Mastery (Owning the Structure)
+### Structural Modeling Practice
 
-### Goal: Become comfortable creating and evolving schemas.
+* [ ] Design an intentionally bad table.
+* [ ] Identify redundancy.
+* [ ] Normalize it to 3NF.
+* [ ] Explain what improved.
+* [ ] Explain what became more complex.
 
-### Table Creation Depth
+You should feel the modeling tradeoffs.
 
-* [ ] Create 5 independent tables from scratch.
+---
 
-* [ ] Create 3 tables with foreign key relationships.
+# Section 2 — Entity Relationship Design
 
-* [ ] Create at least one table with:
+### Goal: Think visually and structurally.
 
-  * Composite primary key
-  * Composite foreign key
+* [ ] Design at least 3 ER diagrams (can be hand-drawn or digital):
 
+  * E-commerce system
+  * Rental system
+  * Event tracking system
+
+For each:
+
+* [ ] Identify entities
+* [ ] Identify relationships
+* [ ] Define cardinality
+* [ ] Define mandatory vs optional relationships
+* [ ] Translate diagram into logical tables
+
+No SQL yet.
+Just structure.
+
+---
+
+# Section 3 — Logical DDL Design (Structure Only)
+
+### Goal: Implement logical design using SQL DDL.
+
+Focus on structure, not optimization.
+
+---
+
+### Table Design Practice
+
+* [ ] Create 5 independent tables.
+* [ ] Create 3 related tables with foreign keys.
+* [ ] Create 1 many-to-many bridge table.
 * [ ] Use:
 
   * PRIMARY KEY
+  * FOREIGN KEY
   * UNIQUE
   * NOT NULL
   * CHECK
   * DEFAULT
-  * REFERENCES
-
-### Schema Evolution
-
-* [ ] Add columns after creation.
-
-* [ ] Remove columns safely.
-
-* [ ] Rename columns.
-
-* [ ] Rename tables.
-
-* [ ] Add constraints to existing tables.
-
-* [ ] Drop constraints safely.
-
-* [ ] Simulate schema migration:
-
-  * Create v1 schema
-  * Modify to v2
-  * Ensure data integrity survives
-
-You should stop being afraid of changing schemas.
 
 ---
 
-# Section 3 — Data Lifecycle (DML Depth)
+### Composite Key Practice
 
-### Goal: Understand how data flows and mutates.
-
-* [ ] Insert single rows.
-* [ ] Bulk insert many rows.
-* [ ] Insert from SELECT.
-* [ ] Update using JOIN.
-* [ ] Update using subquery.
-* [ ] Delete with condition.
-* [ ] Delete using JOIN logic.
-* [ ] TRUNCATE vs DELETE comparison.
-* [ ] Use ON CONFLICT (UPSERT).
-
-### Advanced Lifecycle Practice
-
-* [ ] Simulate late-arriving data.
-* [ ] Simulate duplicate data.
-* [ ] Build de-duplication query.
-* [ ] Build idempotent insert logic.
-* [ ] Create data validation checks (row counts, null checks).
-
-You should understand how real pipelines behave.
+* [ ] Create at least one composite primary key.
+* [ ] Create at least one composite foreign key.
+* [ ] Explain when composite keys are appropriate.
+* [ ] Explain when surrogate keys are better.
 
 ---
 
-# Section 4 — Keys & Constraints (Integrity Enforcement)
+# Section 4 — Grain Discipline (Warehouse Thinking Begins)
 
-### Goal: Protect the system intentionally.
+### Goal: Learn to define what one row represents.
 
-* [ ] Create surrogate keys.
-* [ ] Create natural keys.
-* [ ] Compare tradeoffs.
-* [ ] Break a foreign key intentionally.
-* [ ] Break a CHECK constraint intentionally.
-* [ ] Test cascade delete.
-* [ ] Test cascade update.
-* [ ] Understand ON DELETE behaviors.
+For every table:
 
-You should know how the database prevents corruption.
+* [ ] Write one sentence defining the grain.
+* [ ] Identify what would violate the grain.
+* [ ] Write a query that accidentally duplicates the grain.
+* [ ] Refactor the schema or query to fix it.
 
----
-
-# Section 5 — Table Grain Discipline
-
-### Goal: Think like a warehouse engineer.
-
-For every table you create:
-
-* [ ] Write one sentence defining its grain.
-* [ ] Identify what would violate that grain.
-* [ ] Write a query that accidentally duplicates grain.
-* [ ] Fix it.
-
-Practice:
+Practice defining:
 
 * Transaction grain
-* Snapshot grain
 * Event grain
+* Snapshot grain
 
-You should start thinking in “rows represent events.”
+This is a major mindset shift.
 
 ---
 
-# Section 6 — Star Schema Construction
+# Section 5 — Business Rule Translation
 
-### Goal: Build your first mini warehouse.
+### Goal: Convert business logic into schema rules.
 
-* [ ] Create at least:
+For a fictional business:
+
+* [ ] Define rules in plain English.
+* [ ] Convert them into:
+
+  * Constraints
+  * Relationships
+  * Required fields
+  * Unique restrictions
+
+Example rule types:
+
+* “A customer must have a unique email.”
+* “An order must belong to exactly one customer.”
+* “A rental cannot exist without inventory.”
+
+Translate logic into structure.
+
+---
+
+# Section 6 — Logical Star Schema Design
+
+### Goal: Transition into dimensional modeling (logically).
+
+No performance tuning.
+No partitioning.
+
+---
+
+* [ ] Design:
 
   * 1 fact table
   * 3 dimension tables
-* [ ] Define fact grain clearly.
-* [ ] Use surrogate keys in dimensions.
-* [ ] Connect via foreign keys.
-* [ ] Insert sample data.
-* [ ] Write analytical queries on top.
+
+* [ ] Clearly define fact grain.
+
+* [ ] Clearly define dimension attributes.
+
+* [ ] Define surrogate keys in dimensions.
+
+* [ ] Define foreign key relationships.
+
+---
 
 ### Extension
 
-* [ ] Add a new dimension later.
-* [ ] Modify fact table accordingly.
-* [ ] Maintain referential integrity.
+* [ ] Add a new dimension after initial design.
+* [ ] Modify schema logically.
+* [ ] Ensure grain remains correct.
 
-This is the bridge into analytics engineering.
-
----
-
-# Section 7 — Slowly Changing Dimensions (Type 2)
-
-### Goal: Implement historical tracking manually.
-
-* [ ] Create SCD Type 2 dimension table.
-* [ ] Insert initial state.
-* [ ] Simulate attribute change.
-* [ ] Close old row.
-* [ ] Insert new row.
-* [ ] Query current version.
-* [ ] Query historical version.
-* [ ] Join fact table to correct historical dimension version.
-
-You should understand why this is hard and important.
+This builds warehouse discipline.
 
 ---
 
-# Section 8 — Transactions & ACID
+# Section 7 — Slowly Changing Dimensions (Logical Version)
 
-### Goal: Understand reliability guarantees.
+### Goal: Understand historical tracking conceptually.
 
-* [ ] Use BEGIN / COMMIT.
-* [ ] Use ROLLBACK.
-* [ ] Use SAVEPOINT.
-* [ ] Simulate failure mid-transaction.
-* [ ] Test isolation levels.
-* [ ] Simulate dirty reads in two sessions.
+* [ ] Define what SCD Type 2 is in your own words.
+* [ ] Design a Type 2 dimension table.
+* [ ] Define:
 
-You should understand how systems stay consistent.
+  * Start date
+  * End date
+  * Current flag
+* [ ] Explain how fact tables join correctly to historical dimension rows.
 
----
-
-# Section 9 — Views & Abstraction
-
-### Goal: Learn abstraction layers.
-
-* [ ] Create view for analytical summary.
-* [ ] Modify it.
-* [ ] Drop it.
-* [ ] Create materialized view.
-* [ ] Refresh manually.
-* [ ] Compare performance.
-* [ ] Explain when to use each.
-
-This introduces reporting layers.
+No performance concern.
+Just correctness.
 
 ---
 
-# Section 10 — Partitioning Introduction
+# Section 8 — Data Lifecycle (Logical Behavior)
 
-### Goal: Begin thinking about scale.
+### Goal: Understand how data evolves over time.
 
-* [ ] Create table partitioned by date.
-* [ ] Insert into multiple partitions.
-* [ ] Query specific partition.
-* [ ] Compare performance to unpartitioned table.
-* [ ] Explain partition pruning.
+* [ ] Define insert strategy.
+* [ ] Define update strategy.
+* [ ] Define delete strategy.
+* [ ] Define soft delete vs hard delete.
+* [ ] Explain late-arriving data conceptually.
+* [ ] Explain idempotency conceptually.
 
-This prepares you for real large datasets.
+You should be able to describe how data moves through your system.
+
+---
+
+# Section 9 — Transactions & ACID (Conceptual Level)
+
+### Goal: Understand integrity guarantees.
+
+* [ ] Define ACID in your own words.
+* [ ] Explain why transactions matter.
+* [ ] Simulate a logical failure case.
+* [ ] Explain what should happen.
+
+Focus on reasoning, not physical locking mechanics.
+
+---
+
+# Section 10 — Schema Evolution (Logical Perspective)
+
+### Goal: Think like a long-term engineer.
+
+* [ ] Design schema v1.
+* [ ] Modify to v2.
+* [ ] Explain:
+
+  * What changed?
+  * What breaks?
+  * How to migrate safely?
+  * What business rule changed?
+
+This builds engineering maturity.
 
 ---
 
@@ -242,42 +316,39 @@ This prepares you for real large datasets.
 
 For every schema:
 
-* [ ] Define grain.
 * [ ] Define purpose.
+* [ ] Define grain.
 * [ ] Define relationships.
-* [ ] Define update strategy.
-* [ ] Define expected row growth.
+* [ ] Define update lifecycle.
+* [ ] Define business assumptions.
 
-This is what separates hobby work from engineering.
+This is part of modeling, not optional.
 
 ---
 
-# Phase 2.5 Completion Criteria
+# Phase 3 Completion Criteria (Logical Design)
 
 You are done when you can:
 
-* Design relational schema without examples
-* Normalize and denormalize intentionally
-* Define table grain clearly
-* Build star schema from scratch
-* Implement SCD Type 2 correctly
-* Enforce constraints confidently
-* Use transactions safely
-* Modify schema without fear
-* Think about data lifecycle
+* Design normalized relational schemas without examples
+* Define table grain instinctively
+* Build ER diagrams confidently
+* Translate business rules into constraints
+* Design star schemas logically
+* Implement SCD Type 2 conceptually
+* Explain lifecycle behavior
+* Modify schema safely
+* Think in entities instead of queries
 
-At that point:
 
-You are no longer “learning SQL.”
-
-You are learning database engineering.
 
 ---
 
-This phase is critical.
+Phase 4 will then move into:
 
-If you master this properly, Phase 3 (performance + indexing + query planner) will make much more sense.
+Physical implementation
+Indexing
+Query planner
+Partitioning
+Storage considerations
 
-Now I want to ask something important:
-
-Do you want this to be a 2-week intensive block or a 4-week structured progression integrated into your 4-hour daily plan?
