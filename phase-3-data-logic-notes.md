@@ -98,7 +98,7 @@ The logical and physical data part is separate from our front-end application su
 
 
 Guaranteed data consistency and accuracy:
-Data is consistent and accurate because of the mutiple levels of integrity that relational models bring.
+Data is consistent and accurate because of the multiple levels of integrity that relational models bring.
 
 Easy data retrieval:
 I can get data from my database using sql making data retrieval easy.
