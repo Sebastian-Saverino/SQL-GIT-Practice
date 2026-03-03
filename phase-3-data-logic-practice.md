@@ -34,6 +34,32 @@ True
   They don't properly plan out the database and we now live in an age where data is more then just text we have things like pdfs, videos, all kind of different data types.
 
 
+
+
+When is the best time to use an RDBMS program’s design tools? 
+After the logical design step
+2. True or False: Design is crucial to the consistency, integrity, and accuracy of data. 
+True
+3. What is the most detrimental result of improper database design?
+Inaccurate company data
+4. What fact makes the relational database structurally sound and able to guarantee accurate information?
+It gives you set of rules to follow, it provides a structure approach to organizing your data
+5. State two advantages of learning a design methodology. 
+You gain scalabilyt of your data because you have those set of rules to follow making data easier to modify
+You can spend more time for the front end because your data is already properly organized
+6. True or False: You will use your RDBMS program more effectively if you understand database design.
+True
+7. State two objectives of good design. 
+Have a structured base to work from
+Can better query and assist customers as your data is properly organized
+8. What helps to guarantee that data structures and their values are valid and accurate at all times? 
+Asking your company and the users what they need
+Figuring out what data goes to what tables 
+Normalization 
+10. True or False: You can take shortcuts through some of the design processes and still arrive at a good, sound design.
+True but with exceptions as there is still different ways about going about design processes that could make ti easier.
+
+
 ### Note
 
 For this practice, I used a mix of “what I need to know” combined with the SQL roadmap to structure this phase.
