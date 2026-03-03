@@ -108,3 +108,83 @@ I can get data from my database using sql making data retrieval easy.
 
 A relational database management system is a software application that you use with a relational database, because in reality, all a relationship model is, is a way of making sure our data is organized.
 
+# Why Should You Be Concerned with Database Design? 
+
+There are a plethora of reasons we should care about database design, it is crucial to consistency, integrity, and accuracy of the data in a database. Inaccurate data is probably the worst thing you can do with information, as what is the point if your data is inaccurate, what does it help now. Per book definition though: *Inaccurate information is probably the most detrimental result of improper database design—it can adversely affect your organization’s bottom line.*
+
+The logical database design describes the size, shape, and necessary systems for our database, and it logical database design describes the size, shape and necessary systems for your database. Logical design is also for operational and informational needs, such as what records do we want to  save for analytics or what records we need so we can correctly work with the customer. 
+
+
+We then build this within our lovely relational database management system, using SQL or whatever way you want to ingest your data. For the physical creations of our database
+
+# The Importance of Theory 
+
+Theory like in many other diciplines is a used to base how you want to go about a certain problem set for example:
+You know that you can draw data from both tables simultaneously simply because of the way relational database theory works. The data you draw from both tables is based on matching values of a shared field between the tables themselves. Again, your actions have a predictable result.
+
+The relational database is based on two branches of mathematics known as **set theory** and ,**first-order predicate logic**, so this is the basis of the theory relational database.
+We might not always need to understand the mathematical logic behind the relational model but its important to understand the building blocks of the model.
+
+
+# The Advantage of Learning a Good Design Methodology 
+
+There are several advantages from learning and using a good designing methodolgy:
+
+*it gives you the skills you need to design a sound database structure*: Say you hold all your data in excel, that brings about so many issues holding all your data in that one location so having that data organized using a database structure is important.
+
+*Provides you with an organized set of techniques that will guide you step by step through the design process*: What step by step do you have when you just throw data into an excel? This way we have a reason to our why
+
+*Helps you keep your missteps and design reiterations to a minimum*: Once again when we have structure we will find ourselves not having as many errors like when we are told do this with no instruction to do this but here is a instructions.
+
+*Makes the design process easier and reduces and the amount of time you spend designing the database*: When you have a guide, you are less likely to actually to be lead astray and just waste time. 
+
+*Will help you understand and use your RDMBS application program more fully and effectively*: If we can understand how our data is modeled such as when we query our postgres dvdrentals database we can better understand how to get information from it.
+
+# Objectives of Good Design 
+
+You should have actual objectives to achieve when you're making your database structure. 
+
+*Database supports both required and ad hoc information retrieval*: You need your managers information so you know who is the manager when you pay someone but you also want customer data so you can better cater to the customers
+
+*tables are constructed properly and efficiently*: Each table focuses on one subject with distinct fields, so we can avoid redundant data to a minimum.
+
+*Data integrity is imposed at the field, table, and relationship levels*: The levels are integrity are important as we have hit on multiple times already
+
+*Database support business rules relevant to the organization*: The data need to provide valid and accurate information
+
+*Database lends itself to future growth*: The structure of a database is meant to be easy to modify and expand upon the information needs of your company.
+
+# Benefits of Good Design 
+
+*The database structure is easy to modify and maintain*: Modifications you make to a field, table, or relationship need not adversely affect other fields, tables, or relationships in the database.
+
+*Data is easy to modify*: YOu can modify the data without it hurthing other data in the database
+
+*Information is easy to retrieve*: Easy to query because you properly create the relationships between the databases.
+
+*End-user application are easier to develop and build*: You can spend more time with the front end because you created the back end well.
+
+
+
+# Database-Design Methods 
+
+Methods of database design corpoerate three phases: requirements analysis, data modeling and normalization.
+
+Requirement-analysis: You speak with the people that are going to be using it and as well what your company needs in regards to data
+
+Data-modeling: This is how we actually model our database structure using a data-modeling method, such as the following entity-relationship (ER) diagramming, semantic-object modeling, object-role modeling, or UML modeling.
+
+Fields are alos defined and associated with the correct tables such what data do we need for clients information?
+
+Normalization: This ist he last part of our database design, this is the idea of how we have our data and using a set of rules to better trim down redundant data and duplicate data and avoid problems with inserting, updating, or deleting data. The tables are then tested against the normal forms and the modified if any of the problems are found.
+
+The normal forms currently in use are First Normal Form, Second Normal Form, Third Normal Form, Fourth Normal Form, Fifth Normal Form, Sixth Normal Form, Boyce-Codd Normal Form, and Domain/Key Normal Form.
+
+The process of designing a database is not and should not be hard to understand. As long as the process is presented in a straightforward way. 
+
+
+# Normalization 
+
+
+This is the idea of creating our tables then having those tables be put against a set of rules so in the case normalization. 
+
