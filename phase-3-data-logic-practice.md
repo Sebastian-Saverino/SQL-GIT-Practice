@@ -85,6 +85,25 @@ This is about structure.
 
 ---
 
+
+Why is terminology important? Terminolgoy is important as it is the universiel language of the topic you may want to learn such as understanding the terms for relational databases
+2. Name the four categories of terms. Value related terms, structure related terms, relationship-related terms, and Integrity related terms 
+3. What is the difference between data and information? Data is my name Sebastian information is the value I can get from my name and its assocaited information 
+4. What does Null represent? Null, so it represents Null so nothing but not to be confused with 0 
+5. What is the major disadvantage of Null? Null can greatly effect aggregate functions 
+6. What are the chief structures in the database? relations so the table, tuples so the records, and then attributes or a field 
+7. Name the three types of tables. data tables, validation table and virtual table 
+8. What is a view? This is a virtual table so like a set of data you picked from one or more databases then put together
+ 9. State the difference between a key and an index. A key is the unique identifier for a tuple or a record or row and an index is a way of database organization
+10. What are the three types of relationships that can exist between a pair of tables? one-to-one, one-to-many, many-to-many
+11. What are the three ways in which you can characterize a relationship?  You can characterize every relationship in three ways: by the type of relationship that exists between the tables, the manner in which each table participates, and the degree to which each table participates.
+12. What is a field specification? This is what we decide what fields we want in our table 13. What three types of elements does a field specification incorporate? General data so your name, category. Physical so should it be an int or not. Logical so is this field needed can it be Null and etc
+ 14. What is data integrity? this is the idea of keeping your data from redudancy and as well avoiding not bring value to your data to create that information 
+ 15. Name the four types of data integrity. We have table level so this is like making sure we don't have duplicate records and making sure we don't have random nulls where we should not
+ Field level our data is the correct type so our age should be an int for example
+ Relationship level this makes sure our records are synchronized whenever data is enterd into and properly updated throughout your tables within your db
+ Business rules just mean you data falls the rules that your business originally needs or wants from the data while maintaining integrity.
+
 # Section 1 — Relational Foundations (Conceptual & Logical Thinking)
 
 ### Goal: Understand structure before implementation.
