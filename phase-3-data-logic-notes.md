@@ -168,7 +168,7 @@ You should have actual objectives to achieve when you're making your database st
 
 # Database-Design Methods 
 
-Methods of database design corpoerate three phases: requirements analysis, data modeling and normalization.
+Methods of database design corporate three phases: requirements analysis, data modeling and normalization.
 
 Requirement-analysis: You speak with the people that are going to be using it and as well what your company needs in regards to data
 
@@ -188,3 +188,127 @@ The process of designing a database is not and should not be hard to understand.
 
 This is the idea of creating our tables then having those tables be put against a set of rules so in the case normalization. 
 
+
+
+
+# Why This Terminology Is Important 
+
+Like any thing, understanding the terms that are associated is very important.
+
+*They are used to express the special ideas and concepts of the relation database model*: Much of the terms are correlated with set theory and first-predicate logic which as we have discussed make up the basis of our relational model
+
+*They are used to express and define the database-design process itself*: The design process becomes clearer and much easier to understand after you know these terms.
+
+*They are used anywhere a relational database or RDBMS is discussed*: You’ll see these terms in materials such as online software manuals, educational course materials, commercial database software books, and database-related websites.
+
+The following titles are the four groups of terms we will discuss
+
+# Value-Related Terms 
+Data: These are the values you store in a database. Data is static unless someone modifies it through automation or manually
+ex: Sebastian Saverino 83488 05/16/30 79
+
+
+Information: This is data we make useful through processing, in order to get information we must process our data to gain something meaningful from it.
+
+Without data you don't have information as you need to make data into information
+Data is what you store; information is what you retrieve.
+
+Null: this is a missing or unknown value, this does not mean Null is 0 as zero is an integer. 
+
+How does Null appear?
+Missing Values: this is commonly something to happen with human error. Say you ask for someones First name but forgot the last, now you have a Null value for the last name, its not that she doesn't have a last name its that you forgot, therfore human error.
+
+Unknown Value: Say you add a new row, this row has all the data but unlike the other rows where they might have a secondary phone number this one does not therefore the cell is null then we have other circumstances like someone is moving so they don't know there current address yet.
+
+Using a true value such as N/A can still make a difference as Null can be overused as a catch all.
+
+Null is not great as any thing any math operation that uses Null will automatically become Null  (Null × 3) + 4 = Null (25 × Null) + 4 = Null (25 × 3) + Null = Null
+
+Null effects your aggrgates greatly so be aware 
+
+# Structure-Related Terms 
+
+Table: Data stored in a relational database is stored as relations which is stored as tables with tuples(records so our individual rows) and attributes (fields)
+Each table alwasy represents a single, specifc subject. The logical order of records and fields wihtin a tbale has no importanct, and every table has one field which is the primary key which makes each tables unique
+
+In fact, data in a relational database can exist independently of the way it is physically stored in the computer because of these last two table characteristics. This is great news for the user because he or she isn’t required to know the physical location of a record in order to retrieve its data.
+
+Tables can represent either an object or an event.
+
+Object means the table represents something that is tangible, such as a person , place , or thing.No matter the type every object has characteristics that you can store as data and then process as information in an almost infinite number of ways. SO object data can be used to make intelligence answer from. 
+Pilots, products, machines, students, buildings, and equipment are all examples of objects that a table can represent,
+
+
+Events: This is something that occurs at a given point in time that has characteristics you would want to record. You store this data like you objects to gain that information but what makes up the data may be different for example events you may need to record include judicial hearings, movie shoots, elections, and geological surveys.
+
+A table that stores data used to supply that information is called a data table and it is the most common type of table in a relation database. This data is dynamic because we can modify, delete and so on with it.
+![Data Table](image-1.png)
+
+A validation table also known as a lookup table is something that stores data that you specifically use to implement data integrity.  A validation table usually represents subjects, such as city names, skill categories, product codes, and project identification numbers. Data in this type of table is static because it will very rarely change at all.
+
+A field or known as a attirbute in relation database theory is the smallest structure int eh database, and it represents a characterist of the subject of the table to which it belongs. Fields are the structures that actually store datra. 
+
+Every field in a properly designed database contains one and only one value, and its name will identify the type of value it holds.
+
+You’ll typically encounter three other types of fields in an improperly or poorly designed database. 
+A multipart field (also known as a composite field), which contains two or more distinct items within its value.
+A multivalued field, which contains multiple instances of the same type of value. 
+A calculated field, which contains a concatenated text value or the result of a mathematical expression. 
+
+
+A record (known as a tuple in relational database theory) this represents a unique instance of the subject of  a table record is identified throughout the database by a unique value in the primary key field of that record. This is like the row for your data 
+
+A view is a “virtual” table composed of fields from one or more tables in the database; the tables that comprise the view are known as base tables. The relational model refers to a view as being “virtual” because it draws data from base tables rather than storing data on its own. In fact, the only information about a view that is stored in the database is its structure. Many major RDBMS programs support views and typically refer to them as saved queries.
+
+
+They enable you to work with data from multiple tables simultaneously. (For a view to do this, the tables must have connections, or relationships, to each other.) 
+They enable you to prevent certain users from viewing or manipulating specific fields within a table or group of tables. This capability can be very advantageous in terms of security. 
+You can use them to implement data integrity. A view you use for this purpose is known as a validation view.
+
+An index is a structure an RDBMS provides to improve data processing. Your particular RDBMS program will determine how the index works and how you use it. However, an index has absolutely nothing to do with the logical database structure! The only reason I include the term index in this chapter is that people often confuse it with the term key.
+
+indexes are physical structures you use to optimize data processing.
+
+![Table Image](image.png)
+
+# Relationship-Related Terms 
+
+A relationship exists between two tables when you can in some way associate the records of the first table with those of the second. You can establish the relationship via a set of primary and foreign keys (as you learned in the previous section) or through a third table known as a linking table (also known as an associative table).
+
+A relationship is an important component of a relational database. It enables you to create multitable views. It is crucial to data integrity because it helps reduce redundant data and eliminate duplicate data. You can characterize every relationship in three ways: by the type of relationship that exists between the tables, the manner in which each table participates, and the degree to which each table participates. 
+Types of Relationships 
+Three specific types of relationship (traditionally known as a cardinality) can exist between a pair of tables: one-to-one, one-to-many, and many-to-many.
+
+one-to-one: when a single record in the first table is related to zero or one and only one record in the second table, and a single record in the second table is related to one and only one record in the first table. In this type of relationship, one table serves as a “parent” table and the other serves as a “child” table. You establish the relationship by taking a copy of the parent table’s primary key and incorporating it within the structure of the child table, where it becomes a foreign key.
+
+![one-to-one](image-2.png)
+
+one-to-many: A one-to-many relationship exists between a pair of tables when a single record in the first table can be related to zero, one, or many records in the second table, but a single record in the second table can be related to only one record in the first table. The parent/child model I used to describe a one-to-one relationship works here as well. In this case, the table on the “one” side of the relationship is the parent table, and the table on the “many” side is the child table. You establish a one-to-many relationship by taking a copy of the parent table’s primary key and incorporating it within the structure of the child table, where it becomes a foreign key.
+
+![one-to-many](image-3.png)
+
+many-to-many: A pair of tables bears a many-to-many relationship when a single record in the first table can be related to zero, one, or many records in the second table and likewise a single record in the second table can be related to zero, one, or many records in the first table. You establish this relationship with a linking table. (You learned a little bit about this type of table at the beginning of this section.) A linking table makes it easy for you to associate records from one table with those of the other and will help to ensure you have no problems adding, deleting, or modifying related data. You define a linking table by taking copies of the primary key of each table in the relationship and using them to form the structure of the new table. These fields actually serve two distinct roles: Together, they form the composite primary key of the linking table; separately, they each serve as a foreign key.
+
+![many-to-many](image-4.png)
+
+
+Types of Participation:
+
+A table’s participation within a relationship can be either mandatory or optional. Say a relationship exists between two tables called TABLE_A and TABLE_B. TABLE_A’s participation is mandatory if you must enter at least one record into TABLE_A before you can enter records into TABLE_B. 
+TABLE_A’s participation is optional if you are not required to enter any records into TABLE_A before you can enter records into TABLE_B. 
+
+# Integrity-Related Terms
+
+A field specification (traditionally known as a domain) represents all the elements of a field. Each field specification incorporates three types of elements: general, physical, and logical.
+
+
+General elements constitute the most fundamental information about the field and include items such as Field Name, Description, and Parent Table. 
+Physical elements determine how a field is built and how it is represented to the person using it. This category includes items such as Data Type, Length, and Character Support. 
+Logical elements describe the values stored in a field and include items such as Required Value, Range of Values, and Null Support. 
+
+
+
+Table-level integrity (traditionally known as entity integrity) ensures that no duplicate records exist within the table and that the field that identifies each record within the table is unique and never Null. 
+Field-level integrity (traditionally known as domain integrity) ensures that the structure of every field is sound; that the values in each field are valid, consistent, and accurate; and that fields of the same type (such as CITY fields) are consistently defined throughout the database. 
+Relationship-level integrity (traditionally known as referential integrity) ensures that the relationship between a pair of tables is sound and that the records in the tables are synchronized whenever data is entered into, updated in, or deleted from either table.
+Business rules impose restrictions or limitations on certain aspects of a database based on the ways an organization perceives and uses its data. These restrictions can affect aspects of database design, such as the range and types of values stored in a field, the type of participation and the degree of participation of each table within a relationship, and the type of synchronization used for relationship-level integrity in certain relationships. All of these restrictions are discussed in more detail in Chapter 11. Because business rules affect integrity, they must be considered along with the other three types of data integrity during the design process. 
