@@ -104,6 +104,26 @@ Why is terminology important? Terminolgoy is important as it is the universiel l
  Relationship level this makes sure our records are synchronized whenever data is enterd into and properly updated throughout your tables within your db
  Business rules just mean you data falls the rules that your business originally needs or wants from the data while maintaining integrity.
 
+# Chapter 4
+
+1. Why is it important to complete the design process thoroughly?
+As the idea of data integrity is about being thorough, its like you building credit you have to build up to it.
+
+2. True or False: The level of structural integrity is in direct proportion to how thoroughly you follow the design process. True
+3. What is the purpose of a mission statement? To understand the why of your database
+4. What are mission objectives? These are the does so does the database function correctly like does it store client data properly can I see each persons orders and so on
+5. What constitutes your organization’s fundamental data requirements? The mission statement and mission objectives
+ 6. How do you determine the various subjects that the tables will represent? Through interviews with people such as your management, users, and so on
+7. True or False: You establish field specifications for each field in the database during the second phase of the database design process. False
+ 8. How do you establish a logical connection between the tables in a relationship? By speaking with users and etc while using logic
+  9. What determines a set of limitations and requirements that you must build into the database? Understanding the use cases of different management and users
+  10. What can you design and implement to support certain business rules? You can design views to support business rules  11. How do you determine the types of views you need to build in the database? By speaking with the users
+  12. When can you implement your logical structure in an RDBMS program? After you have checked your data integrity as well as you have made sure to abide by the business rules.
+
+
+
+
+
 # Section 1 — Relational Foundations (Conceptual & Logical Thinking)
 
 ### Goal: Understand structure before implementation.
