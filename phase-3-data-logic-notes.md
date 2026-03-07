@@ -1053,4 +1053,31 @@ This phase is important because it acts as the final check before the design is 
 
 ---
 
+# Chapter 5
 
+Database design you start by defining the end result funny enough.
+
+We want to define the purpose and the functions of your database
+
+# Conducting Interviews
+
+Interviews are important as they are the link between us the dev and the people you're creating the database for. Understanding things such as relationships, tables, and so on can be better clarified through interviews with the users.
+
+It is important to have guidelines for your interviews:
+    Make the participants aware of your intentions, let the people want to be apart of the interview
+    Let the participant know there input is valuable to the overall design process
+    Have everyone understand your the main arbitrator if and when a dispute arises.
+
+For us as the interviewer:
+    Choose an appropriate place to hold your meeting
+    Be reasonable with the amount of people within the meeting
+    Conduct separate meetings for users and management
+    Prepare your questions prior to the interview.
+    If you don't take good notes, either assign that task to a dependable transcriber for each interview or inform them you will record the call for reference purposes
+    Give everyone our undivided attention
+    Keep the pace of the interview moving
+    Always maintain control of the interview
+
+Defining the Mission Statement 
+
+Defining the Mission Objectives
