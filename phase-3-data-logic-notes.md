@@ -1114,3 +1114,106 @@ Once again we want to ask open ended questions.
 What kind of work do you perform on a daily basis? How would you define your job description? What kind of data do you work with? What types of reports do you generate? What types of things do you keep track of? What types of services does your organization provide? How would you describe the type of work you do?
 
 Here are some good questions to ask.
+
+
+
+# Getting to Know the Current Database 
+To determine where you should go, you must first understand where you are.
+
+We must understand how the organization database is currently before we can move forward with the design process.
+
+Understand how does the current database support the mission statement and mission objectives currently.
+
+You want to be asking those more abstract questions in this level.
+
+We can answer design related questions by looking into the current database before you create the next one for your company.
+Paper-based: This is your file system storage so like each person has a folder dedicated to them.
+
+Legacy database: This a database your company has been working with for quite some time now, so understanding that is important as this can provide a base for when your going through the design process.
+
+Human knowledge bases: This is based on the memory of individuals within your company.
+
+Keep this in mind when creating the next database and analyzing the current databases.
+
+**Do not adopt the current database structure as the bassi for the new database structure.**
+
+If the old database didn't have problems you wouldn't be making a new one, keep that in mind.
+
+When analyzing through a paper or a legacy database remember work through the process patiently and methodically.
+
+# Conducting the Analysis 
+The three steps in this process are:
+Reviewing the way the data is collected.
+Reviewing the manner in which information is presented.
+Conducting interviews with users and management.
+
+# Looking at How Data Is Collected
+We first start by reviewing all paper-based items. Figure out the types of documents the organization is using to record the data and then make a record of each. Make sure to store these examples so we can use them later.
+For example, say you have a training record, look at how they're organized.
+
+We then review the computer programs that are used to collect data as well, as this can provide information regarding how the company works with its data.
+I see this like when you take a look a how to sign up for something, we can take that and have that be apart of the design process.
+Save screen shots of these forms.
+
+# Looking at How Information Is Presented 
+Now we look at how is data presented, this can be through reports, web pages, or slide shows.
+
+Looking through how the company uses its data, we can decipher where does data from a database go into the presentations and what doesn't.
+
+Reaching out to the person who create these presentations can save a bunch of time.
+
+# Conducting Interviews 
+This is where we interview management and users on how they use the data.
+
+They can provide more context on your previous analysis.
+
+They can just tell you how the use data in the company.
+
+They are important for defining the preliminary field and the table structures
+
+Can help us define the future data needs
+
+Interviewing is so so so important.
+
+We want to look for a subject so a person place or thing with this we want to find the characteristics that are associated with the subject.
+
+Client is a person and age, salary, payment method are characteristics of this client.
+
+
+# Interviewing Users 
+
+When interviewing users we want to focus on these four things.
+
+The types of data users are currently using
+How users are currently using their data
+The collection of samples we assembled during the first two steps of the analysis.
+The required information the users require on a daily basis.
+
+
+
+Interviewing Management 
+We're focused on these types of questions for these interviews.
+
+The types of information managers currently receive.
+The types of additional information the need to receive.
+The types of information they foresee themselves needing
+Their perception of the organization's overall information requirements.
+
+
+
+Compiling a Complete List of Fields 
+
+Now we have completed our analysis of the current database and the users/management of the company.
+We can create our preliminary field list. This will represent the organizations fundamental data requirements and constitutes the core set of fields that you'll define in the database. 
+
+We create this preliminary field in two steps.
+
+We first review and refine those characteristics so the describers of our subjects. As we have spoken on previously a field is a characteristic so now we just write out all those characteristics then remove the duplicates
+Say we have name three times this is where we break that down and associate it to its subject so we would have Employee name client name and contact name
+See where we have product number product num and product # then use the best option so product number in this case
+
+Step 2 is determine whether there are new characteristics in any of your samples. 
+
+We then compare with the characteristics we have in our list already then add form there.
+
+We must create a field that contains aggregated data then make that our calculated field list

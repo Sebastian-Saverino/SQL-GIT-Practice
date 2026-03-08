@@ -140,6 +140,26 @@ As the idea of data integrity is about being thorough, its like you building cre
       15. True or False: A mission objective can describe more than one task. False
        16. State two ways that a mission objective can be derived from a response. The inital what and how
 
+
+# Chapter 6
+1. State two goals of analyzing the current database. To see how the data is collected and presented 
+2. True or False: You can adopt the current database structure as the basis for the new structure. False 
+3. What is a legacy database? This is a database that was used to store the data previously 
+4. State two steps of the analysis process. Review how data is collected and how it is presented
+5. Which types of computer software programs should you review during the analysis? What the users use to input data for example
+6. Why should you conduct interviews after you gather data collection and information presentation samples? Interviews are always important but they can refine the data we have collected during our analysis of paper / legacy based databases 
+7. How do you use “open-ended” and “closed” questions? Asking about there workflow 
+8. What is the Subject-Identification Technique? This is where we look for nouns in what they say so like events or for example customers
+9. How do you identify specific attributes for a particular subject? The say I input data on customers such as there age, address, and so on these are characteristics that describe the customers
+10. True or False: You should interview users and management at the same time. False
+11. What three basic types of information requirements must you identify? I don't know
+12. What is the Preliminary Field List? This is our list of characteristics that can be used as our fields
+13. State why each item on the Preliminary Field List should have a unique name. We want to remove duplicates and this is the place to do, we want each characteristics to have a purpose.
+14. What is a value list? This is a list of values a user might have to choose from for one characteristic
+15. What are calculated fields? These are aggregated fields,  What (if anything) should you do about them? make sure based off the characteristics you have named should be able to create this aggregated data.
+
+  
+
 # Section 1 — Relational Foundations (Conceptual & Logical Thinking)
 
 ### Goal: Understand structure before implementation.
