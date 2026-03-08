@@ -122,7 +122,23 @@ As the idea of data integrity is about being thorough, its like you building cre
 
 
 
-
+# Chapter 5 
+1. Why are interviews important? They help understand the mission statement and the mission objectives that your database is built off of, as well as understanding the why to the what your developing
+2. What problem can arise when you conduct an interview with a large number of people? A vareity of answers and possibly disputes between individuals and different prespectives
+3. What is the primary reason for conducting separate interviews with users and management? To best get undivided attentions by different parts of the chain to best understand each portion with any one answer overshadowing another by interviewing them all together
+4. True or False: You’ll commonly use closed questions in your interviews. False
+5. What kind of responses should you try to evoke from the interview participants? GOod ones, so one that provides substance but most importantly there authentic
+. What is the single most important guideline for every interview you conduct? Always maintain control of the interview
+7. What is a mission statement? This is the overarching idea behind your database so why are we developing this in the first place
+8. State two characteristics of a well-written mission statement. Succinct and direct 
+9. True or False: You need not learn about the organization to compose a mission statement. False
+ 10. When is your mission statement complete? Once you can write to the focus and feel it is both succinct and focused 
+  11. What is a mission objective? This should be what the database can do such as hold all customer records
+   12. State two characteristics of a well-written mission objective. Succinct and to the point
+    13. True or False: You should interview users and management to help you define mission objectives. True
+     14. How does the staff’s daily work relate to the mission objectives? The point of gathering the mission objectives is to be able to cater the actual needs of the staff daily work such as hold those records
+      15. True or False: A mission objective can describe more than one task. False
+       16. State two ways that a mission objective can be derived from a response. The inital what and how
 
 # Section 1 — Relational Foundations (Conceptual & Logical Thinking)
 

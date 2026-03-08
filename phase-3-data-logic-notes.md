@@ -1078,6 +1078,39 @@ For us as the interviewer:
     Keep the pace of the interview moving
     Always maintain control of the interview
 
-Defining the Mission Statement 
+# Defining the Mission Statement 
 
-Defining the Mission Objectives
+The mission statement is the purpose of the database as we have learned about previously.
+This brings the focus on what you're doing so you don't find yourself going over track
+
+A good mission statement is to the point and succinct
+
+this is an example of a good mission statement: The purpose of the New Starz Talent Agency database is to maintain the data we generate and to supply information that supports the engagement services we provide to our clients and the management services we provide to our entertainers.
+
+A good mission statement is free of phrases or sentences that explicitly describe specific tasks.
+
+Bad mission statement: The purpose of the Whatcom County Hearing Examiner’s database is to keep track of applications for land use, maintain data on applicants, keep a record of all hearings, keep a record of all decisions, keep a record of all appeals, maintain data on department employees, and maintain data for general office use.
+
+Composing the mission statement: You want to interview the owner or manager of the organization to learn about the needs and also the organization as a whole as this can support the design process later as well. Ask open ended questions
+
+How would you describe the purpose of your organization to a new client? What would you say is the purpose of your organization? What is the major function of your organization? How would you describe what your organization does? How would you define the single most important reason for the existence of your organization? What is the main focus of your organization?
+
+These are some good questions for example you can ask.
+
+# Defining the Mission Objectives
+
+These are statements that will go over the specific tasks you want to be able to complete with your database. 
+
+Mission objectives are very important when working further into the design process
+
+
+A well-written mission objective is a declarative sentence that clearly defines a general task and is free from unnecessary details. It is expressed in general terms, succinct and to the point, and unambiguous. Here are some examples of typical mission objectives: Maintain complete patient address information. Keep track of all customer sales. Make sure an account representative is responsible for no more than 20 accounts at any given time. Keep track of vehicle maintenance. Produce employee phone directories.
+
+
+Defining mission objectives is a process that involves conducting interviews with users and management and then writing appropriate mission objectives based on the information gathered from the interviews.
+
+Once again we want to ask open ended questions. 
+
+What kind of work do you perform on a daily basis? How would you define your job description? What kind of data do you work with? What types of reports do you generate? What types of things do you keep track of? What types of services does your organization provide? How would you describe the type of work you do?
+
+Here are some good questions to ask.
