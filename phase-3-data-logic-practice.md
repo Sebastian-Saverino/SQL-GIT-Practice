@@ -158,7 +158,25 @@ As the idea of data integrity is about being thorough, its like you building cre
 14. What is a value list? This is a list of values a user might have to choose from for one characteristic
 15. What are calculated fields? These are aggregated fields,  What (if anything) should you do about them? make sure based off the characteristics you have named should be able to create this aggregated data.
 
-  
+# Chapter 7 
+
+1. How do you identify and establish tables for a new database? We define the preliminary table list
+2. Why do you use the Preliminary Field List to help you define tables for the database? You use the characteristics and you play connect the dots
+3. What action do you take when an item on the list of subjects and a differently named item on the Preliminary Table List both represent the same subject? You keep the preliminary table list name and get rid of the duplicate from the subjects list
+ 4. What information does the Final Table List provide? The table type
+ 5. State three guidelines for creating table names. No acronyms, be accurate, be unique and meaningful.
+6. State two guidelines for composing table descriptions. Be descriptive
+ 7. How do you assign fields to a table on the Final Table List? By the subject that it describes
+ 8. State three guidelines for creating field names. Be accurate, use singular, using an ideal field to resolve anomalies
+   9. What two problems can poorly designed fields cause? Duplicate data or confusing data.
+   
+   10. What can you use to resolve field anomalies? Through creating more tables tbh
+   11. State three of the Elements of the Ideal Field. Primary key, no multipart or multivalued fields, no calculated fields
+    12. Under what condition is redundant data acceptable? Only in a when you have mutiple subjects
+13. In general terms, what three steps do you follow to resolve a multi-valued field? You seperate the values then decide whether or not to create a new table
+ 14. When is it necessary to use a duplicate field in a table? When you have many to many relationships
+  15. How can you refine table structures? By creating more tables to reduce redundancy 
+   17. What is a subset table? This is an inital table broken up into different tables in order to reduce blank data.
 
 # Section 1 — Relational Foundations (Conceptual & Logical Thinking)
 
