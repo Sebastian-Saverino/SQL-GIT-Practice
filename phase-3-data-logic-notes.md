@@ -1217,3 +1217,163 @@ Step 2 is determine whether there are new characteristics in any of your samples
 We then compare with the characteristics we have in our list already then add form there.
 
 We must create a field that contains aggregated data then make that our calculated field list
+
+
+# Chapter 7
+
+## Defining the Preliminary Table List 
+This is the phase where we establish the tables for the new database we're creating.
+
+First we use our preliminary field list so all the characteristics rounded it up into a list for the fields, the second is about using the list of subjects we gathered through our interview process, and the third is using the mission objectives we defined at the beginning of the database design process.
+
+![Preliminary field list](image-5.png)
+
+We look at our preliminary field list and spot the implied subjects.
+
+We create a new preliminary field list that adds the subjects as well.
+
+Remove duplicates first
+
+Cross reference your two preliminary field lists
+
+We then work to having just a single preliminary field list.
+
+The last step is we reference our mission objectives to our field list to make sure we're not missing anything.
+
+# Defining the Final Table List 
+
+Now that our preliminary field list is complete we can make our final table list.
+
+Here we have table types this can help classify a table by the role is plays in our database.
+
+A data table: represents a subject that is important to the organization and is the primary foundation of the database.
+
+Linking table: Establishes a link between two tables in a many-to-many relationship
+
+Subset table: Contains fields that are related to a particular data table and further describes the data tables subject in a very specific manner
+
+Validation table: Contains relatively static data and is crucial to data integrity.
+
+We also have our table description of what each table does.
+
+Guidelines for creating table names:
+
+Create a unique, descriptive name that is meaningful to the entire org ex Vehicle Maintenance.
+
+Create a name that accurately, clearly, and unambiguously identifies the subject of the table. Example Client Meetings vs Dates good vs bad
+
+Use the minimum number of words necessary to convey the subject of the table. Equipment vs TD_1
+
+Do not use words the convey physical characteristics.
+
+Do not use acronyms or abbreviations
+
+Do not use proper names or other words that will unduly restrict the data that can be entered into the table.
+
+Do not use a name that implicitly or explicitly identifies more than one subject.
+
+Do use the plural form of the name.
+
+
+After we have done this write out a description of each table.
+
+We will further more conduct more interviews with members of the organization to make sure the tables are properly defined.
+
+# Associating Fields with Each Table 
+
+![Table Structures](image-6.png)
+
+This image will show us how we map our subjects and associate our field names to each of them
+# Refining the Fields 
+
+Now we refine our field names.
+
+Create a unique, descriptive names that is meaningful to the entire organization.
+
+Create a name that accurately, clearly, and unambiguously identifies the characteristic a field represents.
+
+Use the minimum number of words necessary to convey the characteristic of the field.
+
+Do not use acronyms or abbreviations
+
+Do not use words that could confuse the meaning of the field name.
+
+use the singular form of the name. Skill vs skills
+
+Using an ideal field to resolve anomalies.
+
+It represents a distinct characteristic of the subject of the table. 
+
+It contains only a single value.
+
+A field that can possibly store two more occurrences of the same value is known as a multivalued field.
+
+It cannot be deconstructed into smaller components. A field that can potentially store two or more distinct items within a value is know as a multipart or composite field.
+
+It does not contain a calculated or concatenated value.
+
+It is unique within teh entire database structure.
+
+It retains a majority of its properties when it appears in more than one table. 
+
+![Multipart Field](image-7.png)
+
+THis is the idea of a multipart field.
+
+You want to break these apart and make them there own distinct fields
+
+![Multivalued Field](image-8.png)
+
+
+We can use the basis of the mulitvalued field and make it into its own table. 
+![Fixed Multivalued Field](image-9.png)
+
+
+# Refining the Table Structures
+
+A duplicate field is a field that appears in two or more tables for any of these reasons.
+It is used to relate a set of tables together. 
+It indicates multiple occurrences of a particular type of value. 
+There is a perceived need for supplemental information. 
+The only instance in which a duplicate field is necessary is when it serves to establish a relationship between
+
+The elements of the Ideal Table constitute a set of guidelines you can to create sound table structures 
+
+An ideal table has the following
+
+Represents a single subject which can be an object or event
+
+It has a primary key
+
+It does not contain multipart or multivalued fields.
+
+It does not contain calculated fields.
+Does not contain unnecessary duplicate fields
+
+It contains only an absolute minimum amount of redundant data.
+
+When you see reference fields these can be easy to resolve, you just get rid of them lol, you don't need the company website associated with the instrument 
+
+![Resolved multiple sets of duplicate fields](image-10.png)
+
+
+Establishing subset tables
+
+This is the idea of having a table that has multiple fields that could have one but one will not
+
+![Non Subset table](image-11.png)
+
+![The table split up](image-12.png)
+
+
+When you identify subset tables such as these, you can refine them using these steps. 
+Remove all the fields that the subset tables have in common and use them as the basis for a new data table. 
+Identify what subject the new data table represents, and then give that table an appropriate name. 
+Make sure that the subset tables represent subordinate subjects of the data table and modify the subset table names as necessary. 
+Compose a suitable description for the data table and then add it to the Final Table List. Indicate the table type as “Data.”
+
+![Unidentified subset table](image-13.png)
+
+![Refined subset table](image-14.png)
+
+We can refine this further with foreign keys, relationships, and business rules.
