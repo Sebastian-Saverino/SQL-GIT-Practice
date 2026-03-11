@@ -178,6 +178,12 @@ As the idea of data integrity is about being thorough, its like you building cre
   15. How can you refine table structures? By creating more tables to reduce redundancy 
    17. What is a subset table? This is an inital table broken up into different tables in order to reduce blank data.
 
+
+# Chapter 8 
+
+
+
+
 # Section 1 — Relational Foundations (Conceptual & Logical Thinking)
 
 ### Goal: Understand structure before implementation.

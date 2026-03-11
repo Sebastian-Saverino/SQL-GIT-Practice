@@ -1377,3 +1377,78 @@ Compose a suitable description for the data table and then add it to the Final T
 ![Refined subset table](image-14.png)
 
 We can refine this further with foreign keys, relationships, and business rules.
+
+
+# Chapter 8
+
+## Why Keys Are Important 
+
+Keys are important because of the following:
+
+They ensure that each record in a table is precisely identified. 
+
+They help establish and enforce various types of integrity.
+
+They serve to establish table relationships.
+
+### Establishing Keys for Each Table
+
+Our four main keys are candidate, primary, foreign, and non-keys.
+
+Candidate keys:
+The first key we establish for a table is the candidate key, which is a field or set of fields that uniquely identifies a single instance ( a record in the table) of the table's subject. Each table must have at least one candidate key.
+
+A candidate key cannot be a mutlipart field
+
+must contain unique values
+
+cannot contain null
+
+value cannot cause a breach of the organizations security or privacy rules
+
+Its value is not optional in whole or in part, must something
+
+comprises a minimum number of fields necessary to define uniqueness
+
+values must uniquely and exclusively identify each record in the table.
+
+Its value must exclusively identify the value of each field within a given record.
+
+Its value can be modified only in rare or extreme cases, the value of your candidate key should never change unless its an issue.
+
+
+Say you have a table with no possible candidates for candidate keys you can create an artificial key or surrogate key
+For example creating a part number field
+
+What is an primary key?
+
+A primary key field exclusively identifies the table throughout the database structure and helps establish relationships with other tables
+
+A primary key value uniquely identifies a given record within a table and exclusively represents that record throughout the entire database.
+
+A primary key is a candidate key but a candidate key is not a primary key hence the name.
+
+Guidelines when choosing a proper primary key
+If you have a simple (single-field) candidate key and a composite candidate key, choose the simple candidate key. It’s always best to use a candidate key that contains the least number of fields. 
+Choose a candidate key that incorporates part of the table name within its own name. For example, a candidate key with a name such as SALES INVOICE NUMBER is a good choice for the SALES INVOICES table.
+
+
+Elements of a Primary Key 
+It cannot be a multipart field. 
+It must contain unique values. 
+It cannot contain Nulls.
+Its value cannot cause a breach of the organization’s security or privacy rules. 
+Its value is not optional in whole or in part. 
+It comprises a minimum number of fields necessary to define uniqueness. Its values must uniquely and exclusively identify each record in the table. 
+Its value must exclusively identify the value of each field within a given record. 
+Its value can be modified only in rare or extreme cases.
+
+How do we create the primary key for each table in a database?
+
+Each table must have one-and only one-primary key
+
+Each primary key within the database must be unique-no two tables should have the same primary key unless they bear a one-to-one relationship or one of them is a subset table
+
+Establishing Keys for Each Table 
+Table-Level Integrity 
+Reviewing the Initial Table Structures
