@@ -182,6 +182,25 @@ As the idea of data integrity is about being thorough, its like you building cre
 # Chapter 8 
 
 
+1. State the three reasons why keys are important. As way of indexing, they enforce integrity, create relationships
+2. What are the four main types of keys? Primary keys, candidate keys, foreign keys, non keys
+
+
+3. What is the purpose of a candidate key? As a possible primary key
+4. State four items of the Elements of a Candidate Key. Cannot be a multipart field, must contain unique values, cannot contain null, values must exclusively identify the value of each field within given record.
+5. True or False: A candidate key can be composed of more than one field. True
+6. Can a table have more than one candidate key? Yes
+7. What is an artificial candidate key? This is when you create a candiate key when there are no options
+8. What is the most important key you assign to a table? Primary key
+9. Why is this key important? It is important for table integrity, creating relationships, establishing a way to index
+10. How do you establish a primary key? Working through your candidate keys
+11. State four items of the Elements of a Primary Key. Something that exclusively identifies the table throughout the database structure and helps establish relationships with other tables. You can only have one primary key opposed to having mutiple candidate keys
+12. What must you do before you finalize your selection of a primary key? Choose the candiate that is the simplest
+13. What is an alternate key? This is all the non-primary key candidate keys
+14. What do you ensure by establishing table-level integrity? You insure data integrity
+15. Why should you review the initial table structures? To maintain data integrity throughout the process.
+
+
 
 
 # Section 1 — Relational Foundations (Conceptual & Logical Thinking)

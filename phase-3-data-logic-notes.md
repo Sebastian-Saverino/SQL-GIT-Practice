@@ -1431,7 +1431,7 @@ A primary key is a candidate key but a candidate key is not a primary key hence 
 Guidelines when choosing a proper primary key
 If you have a simple (single-field) candidate key and a composite candidate key, choose the simple candidate key. It’s always best to use a candidate key that contains the least number of fields. 
 Choose a candidate key that incorporates part of the table name within its own name. For example, a candidate key with a name such as SALES INVOICE NUMBER is a good choice for the SALES INVOICES table.
-
+# Establishing Keys for Each Table 
 
 Elements of a Primary Key 
 It cannot be a multipart field. 
@@ -1449,6 +1449,38 @@ Each table must have one-and only one-primary key
 
 Each primary key within the database must be unique-no two tables should have the same primary key unless they bear a one-to-one relationship or one of them is a subset table
 
-Establishing Keys for Each Table 
-Table-Level Integrity 
+Alternate keys:
+
+Once we have designated our primary key we designate the remaining candidate keys will then become alternate keys
+
+
+Non-keys:
+This is a field that does not serve as a candidate,primary, alternate, or foreign key.
+
+
+# Table-Level Integrity 
+
+THis is important as it ensures the following
+
+There are no duplicate records in a table.
+
+The primary key exclusively identifies each record in a table.
+
+Every primary key value is unique.
+
+Primary key values are not null.
+
+
 Reviewing the Initial Table Structures
+
+Now we have identified our keys we now conduct more interviews
+
+We want to do the following:
+
+Ensure that the appropriate subjects are presented in the database. 
+
+Make certain that the table names and table descriptions are suitable and meaningful to everyone.
+
+Make certain that the field names are suitable and meaningful to everyone
+
+Verify that all the apprppriate feidls are assigned to each table
