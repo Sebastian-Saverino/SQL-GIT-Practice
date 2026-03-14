@@ -1523,7 +1523,7 @@ Field-level integrity is attained after you defined a complete set of field spec
 
 All the elements within the specification are categorized as general elements, physical elements, or logical elements.
 
-General Elements: General Elements: Field Name, Parent Table, Specification Type, Source Specification, Shared By, Alias(es), Description
+General Elements: Field Name, Parent Table, Specification Type, Source Specification, Shared By, Alias(es), Description
 
 Physical Elements: Data Type, Length, Decimal Places, Character Support
 

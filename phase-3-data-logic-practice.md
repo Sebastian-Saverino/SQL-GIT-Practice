@@ -200,7 +200,20 @@ As the idea of data integrity is about being thorough, its like you building cre
 14. What do you ensure by establishing table-level integrity? You insure data integrity
 15. Why should you review the initial table structures? To maintain data integrity throughout the process.
 
+# Chapter 9
 
+1. State two major reasons why field specifications are important. Helps retain data integrity while assisting when we continue further in the database creation process
+2. What do you gain by establishing field-level integrity? Data integrity
+3. What are the three categories of elements in a field specification? General elements, physical elements, logical elements
+4. Name the three types of specifications. Unique, generic, and replica field specifications
+5. Why is it beneficial for you to compose a proper field description? To create a structure of integrity 
+6. What does the Data Type element indicate? Whether the field accepts characters, numbers and so on
+7. What does the Character Support element indicate? What kind of characters are expected within the field.
+8. What types of keys are indicated on a field specification? Primary, non, foreign, and alternate
+9. True or False: Null represents a blank value. False 
+10. What is the significance of the Range of Values element? We establishing how much values are within the field
+11. What is the purpose of an Edit Rule? To establish proper control of how the database is edited 
+12. When do you use a generic specification? This is your non primary key / foreign key field so the other fields
 
 
 # Section 1 — Relational Foundations (Conceptual & Logical Thinking)
