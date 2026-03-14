@@ -1484,3 +1484,54 @@ Make certain that the table names and table descriptions are suitable and meanin
 Make certain that the field names are suitable and meaningful to everyone
 
 Verify that all the apprppriate feidls are assigned to each table
+
+
+
+# Chapter 9
+
+## Why Field Specifications Are Important 
+
+Fields are the bedrock of data integrity within your database.
+
+Field specifications help establish and enforce field-level integrity.
+
+Defining field specification for each field enhances overall data integrity.
+
+Defining field specifications compels you to acquire a complete understanding of the nature and purpose of the data in the database.
+
+Field specification constitute the "data dictionary" fo the database.
+
+
+
+## Field-Level Integrity 
+
+
+Field-level integrity is attained after you defined a complete set of field specifications for the field. Field-level integrity warrants the following.
+
+    The identity and purpose of a field are clear, and all the tables in which it appears are properly identified.
+
+    Field definitions are consistent throughout the database.
+
+    The values of a field are consistent and valid.
+
+    The types of modifications that can be applied to the values in the field are clearly identified.
+
+
+
+
+## Anatomy of a Field Specification Using Unique, Generic, and Replica Field Specifications 
+
+All the elements within the specification are categorized as general elements, physical elements, or logical elements.
+
+General Elements: General Elements: Field Name, Parent Table, Specification Type, Source Specification, Shared By, Alias(es), Description
+
+Physical Elements: Data Type, Length, Decimal Places, Character Support
+
+Logical Elements:  Key Type, Key Structure, Uniqueness, Null Support, Values Entered By, Required Value, Range of Values, Edit Rule
+
+![Field Specifications](image-15.png)
+
+![Completed Field Specifications](image-16.png)
+
+This is a rather simple concept of just filling in the blanks fo a Field specifications worksheet.
+
