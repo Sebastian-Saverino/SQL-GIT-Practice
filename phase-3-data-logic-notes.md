@@ -76,6 +76,8 @@ That does not always mean the developer is bad. A lot of people, even experience
 
 A simple example would be an **age column**. We know age should probably be stored as an integer because it is numerical data. But if someone is not thinking carefully about data design, they might just store it as text and move on. It works at first, but later that can create problems with validation, calculations, filtering, and consistency.
 
+Also, age is one of those values that can change over time, so in many cases it is actually better to store **date of birth** and calculate the age when needed **(correction: age is often better derived than stored directly because it changes)**.
+
 So data problems are really where design starts to matter in a serious way.
 
 ---
@@ -199,7 +201,7 @@ Analytical databases are **OLAP databases**, which stands for **Online Analytica
 
 These are designed more for analysis than for day-to-day transactions.
 
-The data is often more static, meaning it does not change in the same constant way as an OLTP system.
+The data is often refreshed in batches or on a schedule rather than changing constantly one transaction at a time **(correction: OLAP data is not necessarily “static,” but it is usually more read-heavy and less transaction-heavy than OLTP)**.
 
 ### Example
 
@@ -239,8 +241,8 @@ Each table, which is a relation, contains:
 
 Two important characteristics of a relational database are:
 
-1. the physical order of the records or fields in a table does not matter
-2. each record is identified by a field containing a unique value
+1. the logical order of the records or fields in a table does not matter
+2. each record is identified by a field or set of fields containing a unique value **(correction: uniqueness can come from one field or a combination of fields, not always just one field)**
 
 Because of these characteristics, data in a relational database exists independently of the way it is physically stored on the machine. That means a user does not need to know where a record is physically located in order to retrieve it.
 
@@ -298,9 +300,9 @@ That separation is important because it allows the database to remain organized 
 
 ---
 
-## Guaranteed Data Consistency and Accuracy
+## Better Data Consistency and Accuracy
 
-Because relational databases enforce multiple integrity levels, they help keep data more consistent and accurate.
+Because relational databases enforce multiple integrity levels, they help keep data more consistent and accurate **(correction: they help improve consistency and accuracy, but they do not magically guarantee perfect data)**.
 
 That is the goal. If your data is not accurate, then the information you generate from it becomes much less trustworthy.
 
@@ -562,7 +564,7 @@ This often happens because of human error, like forgetting to enter a last name.
 **Unknown value**
 This happens when the value truly is not known yet, such as someone not yet knowing their updated address.
 
-Using a value like `N/A` can sometimes be better than relying too heavily on Null, because Null should not become a lazy catch-all.
+Sometimes people use values like `N/A`, `Unknown`, or a code from a lookup table, but that should only happen when those are **real business values** and not just a replacement for Null **(correction: Null should represent missing/unknown when that is the true meaning, rather than being replaced with text by default)**.
 
 ### Why Null Matters
 
@@ -591,7 +593,7 @@ A table contains:
 * records (rows)
 * fields (columns)
 
-The order of records and fields does not matter logically, and each table should have a field that uniquely identifies each record.
+The order of records and fields does not matter logically, and each table should have a field or set of fields that uniquely identifies each record **(correction: uniqueness can come from a single field or a combination of fields)**.
 
 Tables can represent either:
 
@@ -697,7 +699,7 @@ Views are useful because:
 
 * they let you work with multiple tables together
 * they can restrict what certain users see
-* they can support integrity or reporting needs
+* they can support reporting and security needs
 
 ---
 
@@ -753,10 +755,12 @@ A many-to-many relationship exists when records in both tables can relate to man
 
 This type of relationship is implemented using a **linking table**.
 
-That linking table usually contains the primary keys from both tables, and those keys serve as both:
+That linking table usually contains the primary keys from both tables, and those keys usually serve as both:
 
 * a composite primary key
 * foreign keys back to the original tables
+
+**(correction: the linking table often uses the two foreign keys together as a composite primary key, but not always—sometimes it uses a surrogate primary key plus a unique constraint on the pair)**
 
 ---
 
@@ -1055,176 +1059,194 @@ This phase is important because it acts as the final check before the design is 
 
 # Chapter 5
 
-Database design you start by defining the end result funny enough.
+Database design starts by defining the end result, funny enough.
 
-We want to define the purpose and the functions of your database
+We want to define the purpose and the functions of the database.
 
 # Conducting Interviews
 
-Interviews are important as they are the link between us the dev and the people you're creating the database for. Understanding things such as relationships, tables, and so on can be better clarified through interviews with the users.
+Interviews are important because they are the link between us, the dev, and the people we are creating the database for. Understanding things such as relationships, tables, and so on can be better clarified through interviews with the users.
 
 It is important to have guidelines for your interviews:
-    Make the participants aware of your intentions, let the people want to be apart of the interview
-    Let the participant know there input is valuable to the overall design process
-    Have everyone understand your the main arbitrator if and when a dispute arises.
+
+* make the participants aware of your intentions and let them want to be a part of the interview
+* let the participant know their input is valuable to the overall design process
+* have everyone understand that you are the main arbitrator if and when a dispute arises
 
 For us as the interviewer:
-    Choose an appropriate place to hold your meeting
-    Be reasonable with the amount of people within the meeting
-    Conduct separate meetings for users and management
-    Prepare your questions prior to the interview.
-    If you don't take good notes, either assign that task to a dependable transcriber for each interview or inform them you will record the call for reference purposes
-    Give everyone our undivided attention
-    Keep the pace of the interview moving
-    Always maintain control of the interview
 
-# Defining the Mission Statement 
+* choose an appropriate place to hold your meeting
+* be reasonable with the amount of people within the meeting
+* conduct separate meetings for users and management
+* prepare your questions prior to the interview
+* if you do not take good notes, either assign that task to a dependable transcriber for each interview or inform them you will record the call for reference purposes
+* give everyone your undivided attention
+* keep the pace of the interview moving
+* always maintain control of the interview
 
-The mission statement is the purpose of the database as we have learned about previously.
-This brings the focus on what you're doing so you don't find yourself going over track
+# Defining the Mission Statement
 
-A good mission statement is to the point and succinct
+The mission statement is the purpose of the database as we have learned about previously. This brings the focus to what you are doing so you do not find yourself going off track.
 
-this is an example of a good mission statement: The purpose of the New Starz Talent Agency database is to maintain the data we generate and to supply information that supports the engagement services we provide to our clients and the management services we provide to our entertainers.
+A good mission statement is to the point and succinct.
+
+This is an example of a good mission statement:
+
+The purpose of the New Starz Talent Agency database is to maintain the data we generate and to supply information that supports the engagement services we provide to our clients and the management services we provide to our entertainers.
 
 A good mission statement is free of phrases or sentences that explicitly describe specific tasks.
 
-Bad mission statement: The purpose of the Whatcom County Hearing Examiner’s database is to keep track of applications for land use, maintain data on applicants, keep a record of all hearings, keep a record of all decisions, keep a record of all appeals, maintain data on department employees, and maintain data for general office use.
+Bad mission statement:
 
-Composing the mission statement: You want to interview the owner or manager of the organization to learn about the needs and also the organization as a whole as this can support the design process later as well. Ask open ended questions
+The purpose of the Whatcom County Hearing Examiner’s database is to keep track of applications for land use, maintain data on applicants, keep a record of all hearings, keep a record of all decisions, keep a record of all appeals, maintain data on department employees, and maintain data for general office use.
+
+Composing the mission statement: You want to interview the owner or manager of the organization to learn about the needs and also the organization as a whole, as this can support the design process later as well. Ask open-ended questions.
 
 How would you describe the purpose of your organization to a new client? What would you say is the purpose of your organization? What is the major function of your organization? How would you describe what your organization does? How would you define the single most important reason for the existence of your organization? What is the main focus of your organization?
 
-These are some good questions for example you can ask.
+These are some good questions you can ask.
 
 # Defining the Mission Objectives
 
-These are statements that will go over the specific tasks you want to be able to complete with your database. 
+These are statements that go over the specific tasks you want to be able to complete with your database.
 
-Mission objectives are very important when working further into the design process
+Mission objectives are very important when working further into the design process.
 
+A well-written mission objective is a declarative sentence that clearly defines a general task and is free from unnecessary details. It is expressed in general terms, succinct and to the point, and unambiguous. Here are some examples of typical mission objectives:
 
-A well-written mission objective is a declarative sentence that clearly defines a general task and is free from unnecessary details. It is expressed in general terms, succinct and to the point, and unambiguous. Here are some examples of typical mission objectives: Maintain complete patient address information. Keep track of all customer sales. Make sure an account representative is responsible for no more than 20 accounts at any given time. Keep track of vehicle maintenance. Produce employee phone directories.
-
+* Maintain complete patient address information.
+* Keep track of all customer sales.
+* Make sure an account representative is responsible for no more than 20 accounts at any given time.
+* Keep track of vehicle maintenance.
+* Produce employee phone directories.
 
 Defining mission objectives is a process that involves conducting interviews with users and management and then writing appropriate mission objectives based on the information gathered from the interviews.
 
-Once again we want to ask open ended questions. 
+Once again we want to ask open-ended questions.
 
 What kind of work do you perform on a daily basis? How would you define your job description? What kind of data do you work with? What types of reports do you generate? What types of things do you keep track of? What types of services does your organization provide? How would you describe the type of work you do?
 
 Here are some good questions to ask.
 
+# Getting to Know the Current Database
 
-
-# Getting to Know the Current Database 
 To determine where you should go, you must first understand where you are.
 
-We must understand how the organization database is currently before we can move forward with the design process.
+We must understand how the organization’s current database or current system works before we can move forward with the design process.
 
-Understand how does the current database support the mission statement and mission objectives currently.
+Understand how the current database supports the mission statement and mission objectives right now.
 
-You want to be asking those more abstract questions in this level.
+You want to be asking those more abstract questions at this level.
 
-We can answer design related questions by looking into the current database before you create the next one for your company.
-Paper-based: This is your file system storage so like each person has a folder dedicated to them.
+We can answer design-related questions by looking into the current database before you create the next one for your company.
 
-Legacy database: This a database your company has been working with for quite some time now, so understanding that is important as this can provide a base for when your going through the design process.
+**Paper-based system:** This is your file system storage, so like each person has a folder dedicated to them.
 
-Human knowledge bases: This is based on the memory of individuals within your company.
+**Legacy database:** This is a database your company has been working with for quite some time, so understanding that is important because this can provide a base for when you are going through the design process.
 
-Keep this in mind when creating the next database and analyzing the current databases.
+**Human knowledge bases:** This is based on the memory of individuals within your company.
 
-**Do not adopt the current database structure as the bassi for the new database structure.**
+Keep this in mind when creating the next database and analyzing the current systems.
 
-If the old database didn't have problems you wouldn't be making a new one, keep that in mind.
+**Do not adopt the current database structure as the basis for the new database structure.**
 
-When analyzing through a paper or a legacy database remember work through the process patiently and methodically.
+If the old database did not have problems, you would not be making a new one. Keep that in mind.
 
-# Conducting the Analysis 
+When analyzing a paper-based system or a legacy database, remember to work through the process patiently and methodically.
+
+# Conducting the Analysis
+
 The three steps in this process are:
-Reviewing the way the data is collected.
-Reviewing the manner in which information is presented.
-Conducting interviews with users and management.
+
+1. reviewing the way the data is collected
+2. reviewing the manner in which information is presented
+3. conducting interviews with users and management
 
 # Looking at How Data Is Collected
+
 We first start by reviewing all paper-based items. Figure out the types of documents the organization is using to record the data and then make a record of each. Make sure to store these examples so we can use them later.
-For example, say you have a training record, look at how they're organized.
+
+For example, say you have a training record. Look at how it is organized.
 
 We then review the computer programs that are used to collect data as well, as this can provide information regarding how the company works with its data.
-I see this like when you take a look a how to sign up for something, we can take that and have that be apart of the design process.
-Save screen shots of these forms.
 
-# Looking at How Information Is Presented 
-Now we look at how is data presented, this can be through reports, web pages, or slide shows.
+I see this like when you take a look at how to sign up for something. We can take that and have that be a part of the design process.
 
-Looking through how the company uses its data, we can decipher where does data from a database go into the presentations and what doesn't.
+Save screenshots of these forms.
 
-Reaching out to the person who create these presentations can save a bunch of time.
+# Looking at How Information Is Presented
 
-# Conducting Interviews 
+Now we look at how data is presented. This can be through reports, web pages, or slide shows.
+
+Looking through how the company uses its data, we can figure out where data from a database goes into the presentations and what does not.
+
+Reaching out to the person who creates these presentations can save a bunch of time.
+
+# Conducting Interviews
+
 This is where we interview management and users on how they use the data.
 
 They can provide more context on your previous analysis.
 
-They can just tell you how the use data in the company.
+They can tell you how they use data in the company.
 
-They are important for defining the preliminary field and the table structures
+They are important for defining the preliminary field list and the table structures.
 
-Can help us define the future data needs
+They can help us define future data needs.
 
 Interviewing is so so so important.
 
-We want to look for a subject so a person place or thing with this we want to find the characteristics that are associated with the subject.
+We want to look for a subject, so a person, place, thing, or event **(correction: not just person/place/thing—events matter too in database design)**. With this, we want to find the characteristics that are associated with the subject.
 
-Client is a person and age, salary, payment method are characteristics of this client.
+Client is a person, and age, salary, payment method, and so on are characteristics of this client.
 
-
-# Interviewing Users 
+# Interviewing Users
 
 When interviewing users we want to focus on these four things.
 
-The types of data users are currently using
-How users are currently using their data
-The collection of samples we assembled during the first two steps of the analysis.
-The required information the users require on a daily basis.
+* the types of data users are currently using
+* how users are currently using their data
+* the collection of samples we assembled during the first two steps of the analysis
+* the required information the users need on a daily basis
 
+# Interviewing Management
 
+We are focused on these types of questions for these interviews.
 
-Interviewing Management 
-We're focused on these types of questions for these interviews.
+* the types of information managers currently receive
+* the types of additional information they need to receive
+* the types of information they foresee themselves needing
+* their perception of the organization’s overall information requirements
 
-The types of information managers currently receive.
-The types of additional information the need to receive.
-The types of information they foresee themselves needing
-Their perception of the organization's overall information requirements.
-
-
-
-Compiling a Complete List of Fields 
+# Compiling a Complete List of Fields
 
 Now we have completed our analysis of the current database and the users/management of the company.
-We can create our preliminary field list. This will represent the organizations fundamental data requirements and constitutes the core set of fields that you'll define in the database. 
 
-We create this preliminary field in two steps.
+We can create our preliminary field list. This will represent the organization’s fundamental data requirements and constitutes the core set of fields that you will define in the database.
 
-We first review and refine those characteristics so the describers of our subjects. As we have spoken on previously a field is a characteristic so now we just write out all those characteristics then remove the duplicates
-Say we have name three times this is where we break that down and associate it to its subject so we would have Employee name client name and contact name
-See where we have product number product num and product # then use the best option so product number in this case
+We create this preliminary field list in two steps.
 
-Step 2 is determine whether there are new characteristics in any of your samples. 
+First, we review and refine those characteristics, so the descriptors of our subjects. As we have spoken on previously, a field is a characteristic, so now we just write out all those characteristics and then remove the duplicates.
 
-We then compare with the characteristics we have in our list already then add form there.
+Say we have **name** three times. This is where we break that down and associate it to its subject, so we would have **employee name**, **client name**, and **contact name**.
 
-We must create a field that contains aggregated data then make that our calculated field list
+Say we have **product number**, **product num**, and **product #**. Then we use the best option, so **product number** in this case.
 
+Step 2 is to determine whether there are new characteristics in any of your samples.
+
+We then compare those with the characteristics we already have in our list and add from there.
+
+We must create a separate list for fields that contain aggregated or derived data and treat those as **calculated fields** rather than base stored fields **(correction: calculated values usually should not go into the main base field list as regular stored fields unless there is a very specific reason)**.
+
+---
 
 # Chapter 7
 
-## Defining the Preliminary Table List 
-This is the phase where we establish the tables for the new database we're creating.
+## Defining the Preliminary Table List
 
-First we use our preliminary field list so all the characteristics rounded it up into a list for the fields, the second is about using the list of subjects we gathered through our interview process, and the third is using the mission objectives we defined at the beginning of the database design process.
+This is the phase where we establish the tables for the new database we are creating.
+
+First we use our preliminary field list, so all the characteristics rounded up into a list for the fields. The second input is the list of subjects we gathered through our interview process, and the third is using the mission objectives we defined at the beginning of the database design process.
 
 ![Preliminary field list](image-5.png)
 
@@ -1232,145 +1254,123 @@ We look at our preliminary field list and spot the implied subjects.
 
 We create a new preliminary field list that adds the subjects as well.
 
-Remove duplicates first
+Remove duplicates first.
 
-Cross reference your two preliminary field lists
+Cross-reference your two preliminary field lists.
 
-We then work to having just a single preliminary field list.
+We then work toward having just a single preliminary field list.
 
-The last step is we reference our mission objectives to our field list to make sure we're not missing anything.
+The last step is we reference our mission objectives against our field list to make sure we are not missing anything.
 
-# Defining the Final Table List 
+# Defining the Final Table List
 
-Now that our preliminary field list is complete we can make our final table list.
+Now that our preliminary table list is complete we can make our final table list **(correction: this should follow from the preliminary table list, not the field list)**.
 
-Here we have table types this can help classify a table by the role is plays in our database.
+Here we have table types. This can help classify a table by the role it plays in our database.
 
-A data table: represents a subject that is important to the organization and is the primary foundation of the database.
+**A data table:** represents a subject that is important to the organization and is the primary foundation of the database.
 
-Linking table: Establishes a link between two tables in a many-to-many relationship
+**Linking table:** establishes a link between two tables in a many-to-many relationship.
 
-Subset table: Contains fields that are related to a particular data table and further describes the data tables subject in a very specific manner
+**Subset table:** contains fields that are related to a particular data table and further describes the data table’s subject in a very specific manner.
 
-Validation table: Contains relatively static data and is crucial to data integrity.
+**Validation table:** contains relatively static data and is crucial to data integrity.
 
 We also have our table description of what each table does.
 
 Guidelines for creating table names:
 
-Create a unique, descriptive name that is meaningful to the entire org ex Vehicle Maintenance.
+* create a unique, descriptive name that is meaningful to the entire org, ex: Vehicle Maintenance
+* create a name that accurately, clearly, and unambiguously identifies the subject of the table, ex: Client Meetings vs Dates
+* use the minimum number of words necessary to convey the subject of the table
+* do not use words that convey physical characteristics
+* do not use acronyms or abbreviations
+* do not use proper names or other words that will unduly restrict the data that can be entered into the table
+* do not use a name that implicitly or explicitly identifies more than one subject
+* use the plural form of the name
 
-Create a name that accurately, clearly, and unambiguously identifies the subject of the table. Example Client Meetings vs Dates good vs bad
+After we have done this, write out a description of each table.
 
-Use the minimum number of words necessary to convey the subject of the table. Equipment vs TD_1
+We will furthermore conduct more interviews with members of the organization to make sure the tables are properly defined.
 
-Do not use words the convey physical characteristics.
-
-Do not use acronyms or abbreviations
-
-Do not use proper names or other words that will unduly restrict the data that can be entered into the table.
-
-Do not use a name that implicitly or explicitly identifies more than one subject.
-
-Do use the plural form of the name.
-
-
-After we have done this write out a description of each table.
-
-We will further more conduct more interviews with members of the organization to make sure the tables are properly defined.
-
-# Associating Fields with Each Table 
+# Associating Fields with Each Table
 
 ![Table Structures](image-6.png)
 
-This image will show us how we map our subjects and associate our field names to each of them
-# Refining the Fields 
+This image will show us how we map our subjects and associate our field names to each of them.
+
+# Refining the Fields
 
 Now we refine our field names.
 
-Create a unique, descriptive names that is meaningful to the entire organization.
+* create unique, descriptive names that are meaningful to the entire organization
+* create a name that accurately, clearly, and unambiguously identifies the characteristic a field represents
+* use the minimum number of words necessary to convey the characteristic of the field
+* do not use acronyms or abbreviations
+* do not use words that could confuse the meaning of the field name
+* use the singular form of the name, ex: skill not skills
 
-Create a name that accurately, clearly, and unambiguously identifies the characteristic a field represents.
+Using an ideal field to resolve anomalies:
 
-Use the minimum number of words necessary to convey the characteristic of the field.
-
-Do not use acronyms or abbreviations
-
-Do not use words that could confuse the meaning of the field name.
-
-use the singular form of the name. Skill vs skills
-
-Using an ideal field to resolve anomalies.
-
-It represents a distinct characteristic of the subject of the table. 
-
-It contains only a single value.
-
-A field that can possibly store two more occurrences of the same value is known as a multivalued field.
-
-It cannot be deconstructed into smaller components. A field that can potentially store two or more distinct items within a value is know as a multipart or composite field.
-
-It does not contain a calculated or concatenated value.
-
-It is unique within teh entire database structure.
-
-It retains a majority of its properties when it appears in more than one table. 
+* it represents a distinct characteristic of the subject of the table
+* it contains only a single value
+* a field that can possibly store two or more occurrences of the same value is known as a multivalued field
+* it cannot be deconstructed into smaller meaningful components; a field that can potentially store two or more distinct items within a value is known as a multipart or composite field
+* it does not contain a calculated or concatenated value
+* it is unique within the table structure where appropriate and clearly defined across the database **(correction: field names do not have to be globally unique across the entire database, though consistency matters)**
+* it retains a majority of its properties when it appears in more than one table
 
 ![Multipart Field](image-7.png)
 
-THis is the idea of a multipart field.
+This is the idea of a multipart field.
 
-You want to break these apart and make them there own distinct fields
+You want to break these apart and make them their own distinct fields.
 
 ![Multivalued Field](image-8.png)
 
+We can use the basis of the multivalued field and make it into its own table.
 
-We can use the basis of the mulitvalued field and make it into its own table. 
 ![Fixed Multivalued Field](image-9.png)
-
 
 # Refining the Table Structures
 
-A duplicate field is a field that appears in two or more tables for any of these reasons.
-It is used to relate a set of tables together. 
-It indicates multiple occurrences of a particular type of value. 
-There is a perceived need for supplemental information. 
-The only instance in which a duplicate field is necessary is when it serves to establish a relationship between
+A duplicate field is a field that appears in two or more tables for any of these reasons:
 
-The elements of the Ideal Table constitute a set of guidelines you can to create sound table structures 
+* it is used to relate a set of tables together
+* it indicates multiple occurrences of a particular type of value
+* there is a perceived need for supplemental information
 
-An ideal table has the following
+The only instance in which a duplicate field is necessary is when it serves to establish a relationship between tables **(correction: repeated-looking fields can also be valid when they describe different subjects or are intentionally repeated for business reasons, though unnecessary duplication should be avoided)**.
 
-Represents a single subject which can be an object or event
+The elements of the ideal table constitute a set of guidelines you can use to create sound table structures.
 
-It has a primary key
+An ideal table has the following:
 
-It does not contain multipart or multivalued fields.
+* represents a single subject, which can be an object or event
+* it has a primary key
+* it does not contain multipart or multivalued fields
+* it does not contain calculated fields
+* it does not contain unnecessary duplicate fields
+* it contains only an absolute minimum amount of redundant data
 
-It does not contain calculated fields.
-Does not contain unnecessary duplicate fields
-
-It contains only an absolute minimum amount of redundant data.
-
-When you see reference fields these can be easy to resolve, you just get rid of them lol, you don't need the company website associated with the instrument 
+When you see reference fields, these can sometimes be easy to resolve by removing them if they do not actually describe the table’s subject. You do not need the company website associated with the instrument if that data belongs somewhere else **(correction: do not remove a field just because it “looks extra”; remove it only if it does not belong to that subject or causes redundancy)**.
 
 ![Resolved multiple sets of duplicate fields](image-10.png)
 
+## Establishing Subset Tables
 
-Establishing subset tables
-
-This is the idea of having a table that has multiple fields that could have one but one will not
+This is the idea of having a table that has multiple fields that could have one common parent, but one table will not always use all of them.
 
 ![Non Subset table](image-11.png)
 
 ![The table split up](image-12.png)
 
+When you identify subset tables such as these, you can refine them using these steps:
 
-When you identify subset tables such as these, you can refine them using these steps. 
-Remove all the fields that the subset tables have in common and use them as the basis for a new data table. 
-Identify what subject the new data table represents, and then give that table an appropriate name. 
-Make sure that the subset tables represent subordinate subjects of the data table and modify the subset table names as necessary. 
-Compose a suitable description for the data table and then add it to the Final Table List. Indicate the table type as “Data.”
+1. remove all the fields that the subset tables have in common and use them as the basis for a new data table
+2. identify what subject the new data table represents, and then give that table an appropriate name
+3. make sure that the subset tables represent subordinate subjects of the data table and modify the subset table names as necessary
+4. compose a suitable description for the data table and then add it to the Final Table List; indicate the table type as “Data”
 
 ![Unidentified subset table](image-13.png)
 
@@ -1378,160 +1378,335 @@ Compose a suitable description for the data table and then add it to the Final T
 
 We can refine this further with foreign keys, relationships, and business rules.
 
+---
 
 # Chapter 8
 
-## Why Keys Are Important 
+## Why Keys Are Important
 
 Keys are important because of the following:
 
-They ensure that each record in a table is precisely identified. 
-
-They help establish and enforce various types of integrity.
-
-They serve to establish table relationships.
+* they ensure that each record in a table is precisely identified
+* they help establish and enforce various types of integrity
+* they serve to establish table relationships
 
 ### Establishing Keys for Each Table
 
-Our four main keys are candidate, primary, foreign, and non-keys.
+Our four main key categories here are candidate, primary, foreign, and non-key fields.
 
-Candidate keys:
-The first key we establish for a table is the candidate key, which is a field or set of fields that uniquely identifies a single instance ( a record in the table) of the table's subject. Each table must have at least one candidate key.
+## Candidate Keys
 
-A candidate key cannot be a mutlipart field
+The first key we establish for a table is the candidate key, which is a field or set of fields that uniquely identifies a single instance, meaning a record in the table, of the table’s subject. Each table must have at least one candidate key.
 
-must contain unique values
+A candidate key:
 
-cannot contain null
+* cannot be a multipart field
+* must contain unique values
+* cannot contain Null
+* should not cause a breach of the organization’s security or privacy rules
+* its value is not optional in whole or in part
+* comprises the minimum number of fields necessary to define uniqueness
+* its values must uniquely and exclusively identify each record in the table
+* its value should be modified only in rare or extreme cases
 
-value cannot cause a breach of the organizations security or privacy rules
+If you have a table with no possible natural candidate keys, you can create an artificial key or surrogate key.
 
-Its value is not optional in whole or in part, must something
+For example, creating a part number field or an ID field.
 
-comprises a minimum number of fields necessary to define uniqueness
+## What Is a Primary Key?
 
-values must uniquely and exclusively identify each record in the table.
+A primary key field exclusively identifies the table throughout the database structure and helps establish relationships with other tables.
 
-Its value must exclusively identify the value of each field within a given record.
+A primary key value uniquely identifies a given record within a table and represents that record throughout the entire database.
 
-Its value can be modified only in rare or extreme cases, the value of your candidate key should never change unless its an issue.
+A primary key is a candidate key, but a candidate key is not automatically the primary key.
 
+Guidelines when choosing a proper primary key:
 
-Say you have a table with no possible candidates for candidate keys you can create an artificial key or surrogate key
-For example creating a part number field
+* if you have a simple single-field candidate key and a composite candidate key, choose the simple candidate key
+* it is usually best to use the candidate key that contains the least number of fields
+* choose a candidate key that is stable and unlikely to change
+* choose one that is easy to reference from other tables
 
-What is an primary key?
+The naming advice can still be helpful too, like **sales_invoice_number** being a clear key name for a **sales_invoices** table.
 
-A primary key field exclusively identifies the table throughout the database structure and helps establish relationships with other tables
+# Elements of a Primary Key
 
-A primary key value uniquely identifies a given record within a table and exclusively represents that record throughout the entire database.
-
-A primary key is a candidate key but a candidate key is not a primary key hence the name.
-
-Guidelines when choosing a proper primary key
-If you have a simple (single-field) candidate key and a composite candidate key, choose the simple candidate key. It’s always best to use a candidate key that contains the least number of fields. 
-Choose a candidate key that incorporates part of the table name within its own name. For example, a candidate key with a name such as SALES INVOICE NUMBER is a good choice for the SALES INVOICES table.
-# Establishing Keys for Each Table 
-
-Elements of a Primary Key 
-It cannot be a multipart field. 
-It must contain unique values. 
-It cannot contain Nulls.
-Its value cannot cause a breach of the organization’s security or privacy rules. 
-Its value is not optional in whole or in part. 
-It comprises a minimum number of fields necessary to define uniqueness. Its values must uniquely and exclusively identify each record in the table. 
-Its value must exclusively identify the value of each field within a given record. 
-Its value can be modified only in rare or extreme cases.
+* it cannot be a multipart field
+* it must contain unique values
+* it cannot contain Nulls
+* its value cannot cause a breach of the organization’s security or privacy rules
+* its value is not optional in whole or in part
+* it comprises the minimum number of fields necessary to define uniqueness
+* its values must uniquely and exclusively identify each record in the table
+* its value can be modified only in rare or extreme cases
 
 How do we create the primary key for each table in a database?
 
-Each table must have one-and only one-primary key
+* each table must have one and only one primary key
+* each primary key within the database should be clearly distinguishable; two tables can have similarly named keys, but the key values identify records only within their own table **(correction: two tables do not share “the same primary key” just because they both have an `id`; uniqueness is enforced per table, not across the whole database)**
 
-Each primary key within the database must be unique-no two tables should have the same primary key unless they bear a one-to-one relationship or one of them is a subset table
+## Alternate Keys
 
-Alternate keys:
+Once we have designated our primary key, the remaining candidate keys become alternate keys.
 
-Once we have designated our primary key we designate the remaining candidate keys will then become alternate keys
+## Non-Keys
 
+This is a field that does not serve as a candidate, primary, alternate, or foreign key.
 
-Non-keys:
-This is a field that does not serve as a candidate,primary, alternate, or foreign key.
+# Table-Level Integrity
 
+This is important as it ensures the following:
 
-# Table-Level Integrity 
+* there are no duplicate records in a table
+* the primary key exclusively identifies each record in a table
+* every primary key value is unique
+* primary key values are not Null
 
-THis is important as it ensures the following
+## Reviewing the Initial Table Structures
 
-There are no duplicate records in a table.
-
-The primary key exclusively identifies each record in a table.
-
-Every primary key value is unique.
-
-Primary key values are not null.
-
-
-Reviewing the Initial Table Structures
-
-Now we have identified our keys we now conduct more interviews
+Now we have identified our keys, we conduct more interviews.
 
 We want to do the following:
 
-Ensure that the appropriate subjects are presented in the database. 
+* ensure that the appropriate subjects are represented in the database
+* make certain that the table names and table descriptions are suitable and meaningful to everyone
+* make certain that the field names are suitable and meaningful to everyone
+* verify that all the appropriate fields are assigned to each table
 
-Make certain that the table names and table descriptions are suitable and meaningful to everyone.
-
-Make certain that the field names are suitable and meaningful to everyone
-
-Verify that all the apprppriate feidls are assigned to each table
-
-
+---
 
 # Chapter 9
 
-## Why Field Specifications Are Important 
+## Why Field Specifications Are Important
 
 Fields are the bedrock of data integrity within your database.
 
 Field specifications help establish and enforce field-level integrity.
 
-Defining field specification for each field enhances overall data integrity.
+Defining field specifications for each field enhances overall data integrity.
 
 Defining field specifications compels you to acquire a complete understanding of the nature and purpose of the data in the database.
 
-Field specification constitute the "data dictionary" fo the database.
+Field specifications constitute the **data dictionary** for the database.
 
+## Field-Level Integrity
 
+Field-level integrity is attained after you define a complete set of field specifications for the field. Field-level integrity warrants the following:
 
-## Field-Level Integrity 
+* the identity and purpose of a field are clear, and all the tables in which it appears are properly identified
+* field definitions are consistent throughout the database
+* the values of a field are consistent and valid
+* the types of modifications that can be applied to the values in the field are clearly identified
 
-
-Field-level integrity is attained after you defined a complete set of field specifications for the field. Field-level integrity warrants the following.
-
-    The identity and purpose of a field are clear, and all the tables in which it appears are properly identified.
-
-    Field definitions are consistent throughout the database.
-
-    The values of a field are consistent and valid.
-
-    The types of modifications that can be applied to the values in the field are clearly identified.
-
-
-
-
-## Anatomy of a Field Specification Using Unique, Generic, and Replica Field Specifications 
+## Anatomy of a Field Specification Using Unique, Generic, and Replica Field Specifications
 
 All the elements within the specification are categorized as general elements, physical elements, or logical elements.
 
-General Elements: Field Name, Parent Table, Specification Type, Source Specification, Shared By, Alias(es), Description
+**General Elements:** Field Name, Parent Table, Specification Type, Source Specification, Shared By, Alias(es), Description
 
-Physical Elements: Data Type, Length, Decimal Places, Character Support
+**Physical Elements:** Data Type, Length, Decimal Places, Character Support
 
-Logical Elements:  Key Type, Key Structure, Uniqueness, Null Support, Values Entered By, Required Value, Range of Values, Edit Rule
+**Logical Elements:** Key Type, Key Structure, Uniqueness, Null Support, Values Entered By, Required Value, Range of Values, Edit Rule
 
 ![Field Specifications](image-15.png)
 
 ![Completed Field Specifications](image-16.png)
 
-This is a rather simple concept of just filling in the blanks fo a Field specifications worksheet.
+This is a rather simple concept of just filling in the blanks for a field specification worksheet.
 
+---
+
+# Chapter 10
+
+## Why Relationships Are Important
+
+Each relationship has three distinct characteristics: the type of relationship that exists between the tables, the manner in which each participates, and the degree to which each table participates.
+
+A relationship is an important component of a relational database.
+
+* it establishes a connection between a pair of tables that are logically related to each other
+
+![Logical Relationships](image-17.png)
+
+* it helps to further refine table structures and minimize redundant data
+* it is the mechanism that enables you to draw data from multiple sources
+
+## Types of Relationships
+
+There are three types of relationships: one-to-one, one-to-many, and many-to-many.
+
+A table can participate in **multiple** relationships at the same time **(correction: a table is not limited to only one relationship; for example, Orders can relate to Customers, Employees, and Shippers all at once)**.
+
+### One-to-one relationships
+
+This is when only one record is related to one record in another table.
+
+![One-to-one relationship](image-18.png)
+
+![Diagramming one-to-one relationship](image-19.png)
+
+This is generally the **least common** relationship type **(correction: one-to-one is usually less common than one-to-many)**.
+
+### One-to-many relationship
+
+This is when a single record from one table is related to one or more records in another table.
+
+![One-to-many relationship](image-20.png)
+
+![Diagramming one-to-many relationship](image-21.png)
+
+This is generally the **most common** relationship type **(correction: one-to-many is usually the most common relationship type in relational design)**.
+
+### Many-to-many relationship
+
+This is when a single record can be related to one or more records in another table, and from the other table a single record can also be related to one or more records back in the first table.
+
+![Many-to-many relationship](image-22.png)
+
+![Diagramming many-to-many relationship](image-23.png)
+
+This relationship is common conceptually, but in a relational database it is usually implemented through a linking table rather than left directly as a raw many-to-many structure **(correction: many-to-many is typically resolved into two one-to-many relationships through a junction/linking table)**.
+
+Problems with a poorly handled many-to-many setup:
+
+* retrieving information can become tedious
+* one of the tables may contain a large amount of redundant data
+* duplicate data may exist within both tables
+* inserting, updating, and deleting data will be difficult
+
+What is the best way of fixing a poorly created many-to-many relationship you may ask?
+
+Use a linking table.
+
+### Self-Referencing Relationships
+
+This is like an internal relationship within a table. These can be one-to-one, one-to-many, and many-to-many.
+
+#### One-to-one
+
+![one-to-one self-referencing](image-24.png)
+
+![diagramming one-to-one self-referencing](image-26.png)
+
+This is assuming only one member can sponsor one person at a time.
+
+#### One-to-many
+
+![one-to-many self-referencing](image-25.png)
+
+![diagramming one-to-one self-referencing](image-27.png)
+
+#### Many-to-many
+
+![many-to-many self-referencing](image-28.png)
+
+![diagramming many-to-many self-referencing](image-29.png)
+
+## Identifying Existing Relationships
+
+Using the tables we have at this time, we can put them into a table matrix. We are looking for direct relationships here.
+
+When we are figuring out whether two tables have a relationship, we ask these questions:
+
+**Associative:** Can a single record in the first table be associated with one or more records in the second table?
+
+**Contextual:** Is the relationship either ownership-oriented, like own, has, is part of, and contain, or action-oriented, like teach, visit, place, and attend?
+
+![Table matrix](image-30.png)
+
+1:1 — one-to-one
+1:N — one-to-many
+M:N — many-to-many
+
+![Working relationship table matrix](image-31.png)
+
+![Filled out table matrix](image-32.png)
+
+I wanted to highlight how staff has self-referencing with 1:N.
+
+![Self-referencing complete](image-33.png)
+
+This is where we see the self-referencing completed and the relationships are then crossed out.
+
+## Establishing Each Relationship
+
+#### One-to-one relationship
+
+We use a primary key and foreign key to establish the connection.
+
+![one-to-one relationship](image-34.png)
+
+This would be something more like one **department** having one **manager record** in a related table, not just “one employee per department” in the general sense **(correction: the example needs a specific one-to-one business rule to make sense)**.
+
+#### One-to-many relationship
+
+This uses a primary key and a foreign key as well.
+
+![one-to-many relationship](image-35.png)
+
+This can also be a great way to fix multivalued records as well.
+
+#### Many-to-many
+
+This one is a little different. We do not want to just connect both willy nilly.
+
+So we create a linking table. This table will hold the PK from the left table and the PK from the right table, then connections can be made from there.
+
+This is the idea of adding two FKs, so the PKs from both of our tables, then creating a table with both of them, and then they often become a composite key for the linking table **(correction: often, not always—some designs use a surrogate key for the linking table)**.
+
+![many-to-many relationship](image-36.png)
+
+## Refining All Foreign Keys
+
+A foreign key is a field in one table that references a candidate key, usually the primary key, in another table **(correction: it is not just “a primary key hanging out in another table”)**.
+
+Elements of a foreign key:
+
+* it often has the same name or a very similar name as the key from which it was copied
+* it usually uses the same or compatible field specifications as the key it references
+
+![Table Specifications for foreign keys](image-37.png)
+
+Since a foreign key is often based on another key’s definition, it can be treated like a replica in that sense.
+
+## Establishing Relationship Characteristics
+
+Now you will establish the characteristics of each relationship. These characteristics indicate what will occur when you delete a record, the type of participation each table bears within the relationship, and to what degree each table participates in the relationship.
+
+First characteristic is a deletion rule.
+
+This is what should happen if a deletion were to happen in one table and how it would affect the relationship.
+
+**Restrict:** The RDBMS will not delete the record in the parent table if related records exist in the child table. You must delete or reassign the related records in the child table first.
+
+**Cascade:** The RDBMS will delete the record in the parent table, and it will also automatically delete all related records in the child table.
+
+**Set Null:** The RDBMS will delete the record in the parent table and then update the foreign key values of related records in the child table to Null. If you are going to use this deletion rule, the foreign key must allow Null.
+
+**Set Default:** The RDBMS will delete the record in the parent table and then update the foreign key values of related records in the child table to a specified default value you have set.
+
+**No Action / similar behavior depending on DBMS:** Some systems use wording like `NO ACTION` or behave similarly to `RESTRICT` depending on implementation details.
+
+**Deny as “mark inactive” is not a standard foreign key delete action in most RDBMSs** **(correction: making a record inactive is usually an application/business-rule choice, often called a soft delete, not a built-in referential action like CASCADE or SET NULL)**.
+
+When you establish a relationship between a pair of tables, each table participates in a particular manner. The type of participation you assign to a given table determines whether a record must exist in that table before you can enter records into the related table.
+
+The two types of participation are:
+
+**Mandatory:** At least one related record must exist for participation to be valid according to the business rule.
+
+**Optional:** There is no requirement for a related record to exist.
+
+![Relationship type](image-38.png)
+
+![Amount of participation](image-39.png)
+
+## Relationship-Level Integrity
+
+This is after we have properly established our characteristics, and the following speaks to that:
+
+* the connection between the two tables or key fields in a relationship is sound
+* you can insert new records into each table in a meaningful manner
+* you can delete an existing record without producing adverse effects
+* a meaningful limit exists for the number of records that can be interrelated within the relationship
