@@ -684,3 +684,20 @@ Terminology is important because it is basically the universal language of the t
 * a meaningful limit exists for the number of records that can be interrelated within the relationship
 
 ---
+
+
+# Chapter 11
+
+1. What is a business rule? A statement saying this is how we want to have the data function and therefore how we put constraints on our data.
+2. Name the two major types of business rules. database-oriented and application based
+3. Can you establish application-oriented business rules within the logical design of the database? Negative this has to be done in the physical design portion
+4. What are the two categories of database-oriented business rules? Field and relationship rules
+5. What is a field-specific business rule? This could ask what can go into a certain field 
+6. When is a business rule tested? Through mock testing and conversations 
+7. How do you document a business rule? Business rule specification sheet and your erd 
+8. State two advantages a Business Rule Specifications sheet provides. Organization and documentation
+9. What is the purpose of the Action Taken section of a Business Rule Specifications sheet? To specify how it was came about 
+10. What is the purpose of a validation table? As an answer to relationship questions 
+11. What is the typical structure of a validation table? Primary key and the validation data 
+12. What is the association between a business rule and a validation table? It commonly can be used to satisfy a business rule 
+13. Why should you review all of your completed Business Rule Specifications sheets? To make sure you maintain data integrity.

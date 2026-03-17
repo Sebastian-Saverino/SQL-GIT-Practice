@@ -1710,3 +1710,141 @@ This is after we have properly established our characteristics, and the followin
 * you can insert new records into each table in a meaningful manner
 * you can delete an existing record without producing adverse effects
 * a meaningful limit exists for the number of records that can be interrelated within the relationship
+
+
+# Chapter 11
+
+## What Are Business Rules? 
+
+A business rule is a statement that imposes some form of constraint on a specific aspect of the database, such as the elements within a field specification for a particular field or the characteristics of a given relationship.
+
+A SHIP DATE cannot be prior to an ORDER DATE for any given order.
+
+This is an example of a business rule.
+
+
+There are two types of business rules:
+
+Database-oriented: This is a constraint that can be established within the logical design of the database. 
+
+![Data-oriented business rule](image-40.png)
+
+Notice the use fo the range of values, as for this we only have places in the northwest
+
+Application-oriented: These are constraints that can not be imposed in the logical design step of the database. 
+
+You must instead establish them within the physical design of the database or within the design of a database application, where they will be more applicable and meaningful. (I use the term database application here to refer to a program written in some software that allows people in the organization to use the database easily and to perform tasks related to their daily work activities.)
+
+Here is a common application business rule: 
+
+A customer with a “Preferred” status receives a 15% discount on all purchases.
+
+## Categories of Business Rules 
+
+Understand and defining our business rules is easier if we divide them between field specific and relationship specific
+
+Field-specific business rules:
+Business Rules Business rules under the field-specific category impose constraints on the elements of a field specification for a particular field. The number of elements a given rule affects depends on the manner in which you define that rule. 
+
+For example, this rule only affects one element: Order dates cannot be earlier than May 16, 2018, which is the date our business was formed.
+
+![Field-specific business rule](image-41.png)
+
+This is making a change because we need to have canadian zip codes which use letters and numbers
+
+Relationship-Specific Business Rules
+
+Relationship-specific business rules impose constraints that affect the characteristics of a relationship.
+
+Example: Each class must have a minimum of five students, but cannot have more than 20.
+
+![Relationship-specific example](image-42.png)
+
+This shows we edit the participation in our erd
+
+## Defining and Establishing Business Rules 
+
+The best approach to this task is to define and establish the field-specific business rules first, followed by the relationship-specific business rules.
+
+We now work with users and management once again and start scheduling meetings to have discussions regarding the business rules.
+
+Select a table.
+
+    How does the organization use information based on or related to this subject?
+
+Review each field and determine whether it requires any constraints. 
+
+    Based on how the table is used within the database, is a constraint necessary for any element within this specification?
+
+Define the necessary business rules for the field. 
+
+    A county must be associated with each customer. The only counties that can be entered into this field are King, Kitsap, Pierce, and Snohomish.
+
+Establish the rules by modifying the appropriate field specification elements. 
+
+    A county must be associated with each customer.
+
+Determine what actions test the rule. 
+
+    Will this rule be violated if I enter a new record into this table? 
+    Will this rule be violated if I do not enter a new record into this table? 
+    Will this rule be violated if I delete a record from this table? 
+    Will this rule be violated if I enter a value into this field? 
+    Will this rule be violated if I do not enter a value into this field? 
+    Will this rule be violated if I update the value of this field? 
+    Will this rule be violated if I delete the value of this field?
+
+Record the rule on a Business Rule Specifications sheet. 
+
+![Business Rule Specifications Sheet](image-43.png)
+
+
+### Defining and Establishing Relationship-Specific Business Rules
+
+Select a relationship. 
+
+    What kind of information do these tables provide? 
+    Why is the relationship between these two tables important?
+
+Review the relationship and determine whether it requires any constraints. 
+
+    Is there a need to impose some type of limitation on this relationship based on the way the organization functions or conducts its business?
+
+Define the necessary business rules for the relationship. 
+
+    An instructor must teach one class, but no more than eight classes. After you’ve defined the rule, continue with the next step.
+
+Establish the rule by modifying the appropriate relationship characteristics.
+
+    An instructor must teach one class, but no more than eight classes.
+
+    ![Relationship constraint added](image-44.png)
+
+    ![Restrict deletion constraint imposed](image-46.png)
+
+Determine what actions will test the rule. 
+
+    Are there circumstances under which this rule will be violated if I enter a new record into this table? 
+    Will this rule be violated if I do not enter a new record into this table? 
+    Will this rule be violated if I delete a record from this table?
+
+Record the rule on a Business Rule Specifications sheet.
+
+![Business rule specifications sheet](image-45.png)
+
+## Validation Tables 
+
+![Validation table example](image-47.png)
+
+Example: Any supplier we use must be based in one of the 11 contiguous western states, Alaska, or Hawaii.
+
+The best way to then associate this to suppliers if via using a validation table.
+
+
+
+
+Reviewing the Business Rule Specifications Sheets
+
+We then review our specification sheet. 
+
+![Finished Business Rule Specification worksheet](image-48.png)
