@@ -701,3 +701,23 @@ Terminology is important because it is basically the universal language of the t
 11. What is the typical structure of a validation table? Primary key and the validation data 
 12. What is the association between a business rule and a validation table? It commonly can be used to satisfy a business rule 
 13. Why should you review all of your completed Business Rule Specifications sheets? To make sure you maintain data integrity.
+
+
+# Chapter 12
+
+1. Why can you refer to a view as a virtual table? It is a set of base tables from the database so its not an "actual functioning table in the database"
+2. State two reasons why views are valuable. Quicker queries and enforce data integrity 
+3. Name the types of views you can define as you design the logical structure of the database. Aggregate, Data, and Validation 
+4. What does your RDMBS do each time you access a data view (or any type of view, for that matter)? It queries those the tables with the view query 
+5. What determines the type of modifications you can make to a view’s data? If it has aggregates or not 
+6. What is the only requirement you must fulfill to define a multitable data view? Does the view use multiple tables
+7. Why doesn’t a data view contain its own primary key? It doesn't have its own unique data as it is just showing data from another table  
+8. What is the purpose of an aggregate view? To show aggregated data 
+9. What are the most common aggregate functions that you can apply to a set of data? COUNT SUM AVG 
+10. What is a grouping field? This is when you use a group by query 
+11. True or False: You can modify the data in an aggregate view. False 
+12. What is the difference between a validation table and a validation view? One you can edit one you can not
+13. Name two points you would consider when identifying view requirements. Common table use cases and to enforce data integrity 
+14. When should you use calculated fields? When you want to show a visualization 
+15. How do you define a view that displays only science-fiction books? By using a where clause 
+16. Why must you complete a View Specifications sheet for every view in the database? Documentation.

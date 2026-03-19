@@ -1848,3 +1848,59 @@ Reviewing the Business Rule Specifications Sheets
 We then review our specification sheet. 
 
 ![Finished Business Rule Specification worksheet](image-48.png)
+
+
+
+# Chapter 12 
+
+What Are Views? 
+
+A view is a virtual table composed of fields from one or more tables in the database
+
+The tables the comprise a view are the base tables.
+
+Majority of RDBMS programs support views and will refer to them as saved queries.
+
+There are several reasons why you should define and use views in your database
+
+    You can use them to work with data from multiple tables simultaneously.
+
+    They reflect the most current information
+
+    You can customize them to the specific needs of an individual or group of individuals.
+
+    You can use them to help enforce data integrity
+
+    You can use them for security or confidentiality purposes
+
+
+Anatomy of a View 
+
+There are three types of views
+
+Data:
+
+![Single-Table Data View](image-49.png)
+
+![Single-Table Data View](image-50.png)
+
+![Multitable Data View](image-52.png)
+
+
+Aggregate:
+
+![Aggregate View](image-53.png)
+
+Validation:
+
+![Validation View](image-54.png)
+
+Determining and Defining Views
+
+We will once again work with users and management to figure out what kind of views we're going to create.
+
+![Sample for what data we want in our view](image-55.png)
+
+![View diagram](image-56.png)
+
+
