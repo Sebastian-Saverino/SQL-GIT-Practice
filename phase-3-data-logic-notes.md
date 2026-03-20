@@ -1904,3 +1904,109 @@ We will once again work with users and management to figure out what kind of vie
 ![View diagram](image-56.png)
 
 
+# Chapter 13
+
+We're in the final stage of the database design process.
+
+Reviewing data integrity is very important as is simple we continue to take a modular approach.
+
+We first begin with ensuring table level integrity 
+
+Make sure our table conforms to the following,
+
+    No duplicate fields exist in the table.
+
+    No calculated fields exist in the table. 
+
+    No multivalued fields exist in the table. 
+
+    No multipart fields exist in the table. 
+
+    No duplicate records exist in the table. 
+
+    Every record in the table is identified by a primary key value. 
+
+    Each primary key conforms to the Elements of a Primary Key.
+
+For field level integrity:
+
+    Made sure each field conforms to the Elements of the Ideal Field
+
+    Made certain you've defined a set of field specification for each field.
+
+Relationship-Level Integrity
+
+    Properly established the relationship
+
+    Defined the appropriate deletion rules
+
+    Correctly identified the type of participation for each table
+
+    Established the proper degree of participation for each table
+
+Business Rules
+
+    You're sure that each rule imposes a meaningful constraint
+
+    You've determined the proper category for the rule.
+
+    You’ve properly defined and established each rule. 
+    
+    You’ve modified the appropriate field specification elements or table relationship characteristics. 
+    
+    You’ve established the appropriate validation tables. 
+    
+    You’ve completed a Business Rule Specifications sheet for each rule.
+
+Views
+
+    Each view is built on the base tables necessary to provide the required information. 
+    
+    You’ve assigned the appropriate fields to each view. 
+    
+    Each calculated field provides pertinent information or enhances the manner in which the view presents its data. 
+    
+    Each filter returns the appropriate set of records. 
+    
+    Each view has a view diagram. 
+    
+    Each view diagram is accompanied by a View Specifications sheet.
+
+
+# Chapter 14
+
+What not to do in database design.
+
+First do not is Flat File Design
+
+![Flat File Design](image-57.png)
+
+THis is just wrong on so many levels but multipart fields, duplicate fields, no true primary key, just so much wrong.
+
+Spreadsheet Design
+
+This might be alright for stats and things like that as we have used excel before and pivot tables are in fact goated with that being said that does not mean it should be a way of storing data 
+
+![Spreadsheet Design](image-58.png)
+
+We have duplicate fields, multipart fields, multivalued fields, and just difficult to use
+
+Database Design Based on the Database Software
+
+You're RDBMS does not provide a basis or procedure or even a reason for designing a database in a particular fashion
+
+For example: 
+
+    You’re likely to make design decisions based on your perceptions of what your RDBMS can or can't do
+
+    You'll inadvertently let the RDBMS dictate the design of the database as opposed to driving the design of the database as opposed to driving the design strictly from the organizations information requirements.
+
+    Your design will be constrained by your knowledge of the RDBMS
+
+    Your design will be constrained by how skilled you are with your RDBMS. 
+
+    Using this approach to design a database commonly results in improper structural design, insufficient data integrity, and problems with inconsistent data and inaccurate information. 
+
+
+Databases for mere mortals complete!
+
