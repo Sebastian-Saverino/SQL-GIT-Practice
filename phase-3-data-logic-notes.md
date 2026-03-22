@@ -1248,7 +1248,7 @@ This is the phase where we establish the tables for the new database we are crea
 
 First we use our preliminary field list, so all the characteristics rounded up into a list for the fields. The second input is the list of subjects we gathered through our interview process, and the third is using the mission objectives we defined at the beginning of the database design process.
 
-![Preliminary field list](image-5.png)
+![Preliminary field list](images/image-5.png)
 
 We look at our preliminary field list and spot the implied subjects.
 
@@ -1295,7 +1295,7 @@ We will furthermore conduct more interviews with members of the organization to 
 
 # Associating Fields with Each Table
 
-![Table Structures](image-6.png)
+![Table Structures](images/image-6.png)
 
 This image will show us how we map our subjects and associate our field names to each of them.
 
@@ -1320,17 +1320,17 @@ Using an ideal field to resolve anomalies:
 * it is unique within the table structure where appropriate and clearly defined across the database **(correction: field names do not have to be globally unique across the entire database, though consistency matters)**
 * it retains a majority of its properties when it appears in more than one table
 
-![Multipart Field](image-7.png)
+![Multipart Field](images/image-7.png)
 
 This is the idea of a multipart field.
 
 You want to break these apart and make them their own distinct fields.
 
-![Multivalued Field](image-8.png)
+![Multivalued Field](images/image-8.png)
 
 We can use the basis of the multivalued field and make it into its own table.
 
-![Fixed Multivalued Field](image-9.png)
+![Fixed Multivalued Field](images/image-9.png)
 
 # Refining the Table Structures
 
@@ -1355,15 +1355,15 @@ An ideal table has the following:
 
 When you see reference fields, these can sometimes be easy to resolve by removing them if they do not actually describe the table’s subject. You do not need the company website associated with the instrument if that data belongs somewhere else **(correction: do not remove a field just because it “looks extra”; remove it only if it does not belong to that subject or causes redundancy)**.
 
-![Resolved multiple sets of duplicate fields](image-10.png)
+![Resolved multiple sets of duplicate fields](images/image-10.png)
 
 ## Establishing Subset Tables
 
 This is the idea of having a table that has multiple fields that could have one common parent, but one table will not always use all of them.
 
-![Non Subset table](image-11.png)
+![Non Subset table](images/image-11.png)
 
-![The table split up](image-12.png)
+![The table split up](images/image-12.png)
 
 When you identify subset tables such as these, you can refine them using these steps:
 
@@ -1372,9 +1372,9 @@ When you identify subset tables such as these, you can refine them using these s
 3. make sure that the subset tables represent subordinate subjects of the data table and modify the subset table names as necessary
 4. compose a suitable description for the data table and then add it to the Final Table List; indicate the table type as “Data”
 
-![Unidentified subset table](image-13.png)
+![Unidentified subset table](images/image-13.png)
 
-![Refined subset table](image-14.png)
+![Refined subset table](images/image-14.png)
 
 We can refine this further with foreign keys, relationships, and business rules.
 
@@ -1509,9 +1509,9 @@ All the elements within the specification are categorized as general elements, p
 
 **Logical Elements:** Key Type, Key Structure, Uniqueness, Null Support, Values Entered By, Required Value, Range of Values, Edit Rule
 
-![Field Specifications](image-15.png)
+![Field Specifications](images/image-15.png)
 
-![Completed Field Specifications](image-16.png)
+![Completed Field Specifications](images/image-16.png)
 
 This is a rather simple concept of just filling in the blanks for a field specification worksheet.
 
@@ -1527,7 +1527,7 @@ A relationship is an important component of a relational database.
 
 * it establishes a connection between a pair of tables that are logically related to each other
 
-![Logical Relationships](image-17.png)
+![Logical Relationships](images/image-17.png)
 
 * it helps to further refine table structures and minimize redundant data
 * it is the mechanism that enables you to draw data from multiple sources
@@ -1542,9 +1542,9 @@ A table can participate in **multiple** relationships at the same time **(correc
 
 This is when only one record is related to one record in another table.
 
-![One-to-one relationship](image-18.png)
+![One-to-one relationship](images/image-18.png)
 
-![Diagramming one-to-one relationship](image-19.png)
+![Diagramming one-to-one relationship](images/image-19.png)
 
 This is generally the **least common** relationship type **(correction: one-to-one is usually less common than one-to-many)**.
 
@@ -1552,9 +1552,9 @@ This is generally the **least common** relationship type **(correction: one-to-o
 
 This is when a single record from one table is related to one or more records in another table.
 
-![One-to-many relationship](image-20.png)
+![One-to-many relationship](images/image-20.png)
 
-![Diagramming one-to-many relationship](image-21.png)
+![Diagramming one-to-many relationship](images/image-21.png)
 
 This is generally the **most common** relationship type **(correction: one-to-many is usually the most common relationship type in relational design)**.
 
@@ -1562,9 +1562,9 @@ This is generally the **most common** relationship type **(correction: one-to-ma
 
 This is when a single record can be related to one or more records in another table, and from the other table a single record can also be related to one or more records back in the first table.
 
-![Many-to-many relationship](image-22.png)
+![Many-to-many relationship](images/image-22.png)
 
-![Diagramming many-to-many relationship](image-23.png)
+![Diagramming many-to-many relationship](images/image-23.png)
 
 This relationship is common conceptually, but in a relational database it is usually implemented through a linking table rather than left directly as a raw many-to-many structure **(correction: many-to-many is typically resolved into two one-to-many relationships through a junction/linking table)**.
 
@@ -1585,23 +1585,23 @@ This is like an internal relationship within a table. These can be one-to-one, o
 
 #### One-to-one
 
-![one-to-one self-referencing](image-24.png)
+![one-to-one self-referencing](images/image-24.png)
 
-![diagramming one-to-one self-referencing](image-26.png)
+![diagramming one-to-one self-referencing](images/image-26.png)
 
 This is assuming only one member can sponsor one person at a time.
 
 #### One-to-many
 
-![one-to-many self-referencing](image-25.png)
+![one-to-many self-referencing](images/image-25.png)
 
-![diagramming one-to-one self-referencing](image-27.png)
+![diagramming one-to-one self-referencing](images/image-27.png)
 
 #### Many-to-many
 
-![many-to-many self-referencing](image-28.png)
+![many-to-many self-referencing](images/image-28.png)
 
-![diagramming many-to-many self-referencing](image-29.png)
+![diagramming many-to-many self-referencing](images/image-29.png)
 
 ## Identifying Existing Relationships
 
@@ -1613,19 +1613,19 @@ When we are figuring out whether two tables have a relationship, we ask these qu
 
 **Contextual:** Is the relationship either ownership-oriented, like own, has, is part of, and contain, or action-oriented, like teach, visit, place, and attend?
 
-![Table matrix](image-30.png)
+![Table matrix](images/image-30.png)
 
 1:1 — one-to-one
 1:N — one-to-many
 M:N — many-to-many
 
-![Working relationship table matrix](image-31.png)
+![Working relationship table matrix](images/image-31.png)
 
-![Filled out table matrix](image-32.png)
+![Filled out table matrix](images/image-32.png)
 
 I wanted to highlight how staff has self-referencing with 1:N.
 
-![Self-referencing complete](image-33.png)
+![Self-referencing complete](images/image-33.png)
 
 This is where we see the self-referencing completed and the relationships are then crossed out.
 
@@ -1635,7 +1635,7 @@ This is where we see the self-referencing completed and the relationships are th
 
 We use a primary key and foreign key to establish the connection.
 
-![one-to-one relationship](image-34.png)
+![one-to-one relationship](images/image-34.png)
 
 This would be something more like one **department** having one **manager record** in a related table, not just “one employee per department” in the general sense **(correction: the example needs a specific one-to-one business rule to make sense)**.
 
@@ -1643,7 +1643,7 @@ This would be something more like one **department** having one **manager record
 
 This uses a primary key and a foreign key as well.
 
-![one-to-many relationship](image-35.png)
+![one-to-many relationship](images/image-35.png)
 
 This can also be a great way to fix multivalued records as well.
 
@@ -1655,7 +1655,7 @@ So we create a linking table. This table will hold the PK from the left table an
 
 This is the idea of adding two FKs, so the PKs from both of our tables, then creating a table with both of them, and then they often become a composite key for the linking table **(correction: often, not always—some designs use a surrogate key for the linking table)**.
 
-![many-to-many relationship](image-36.png)
+![many-to-many relationship](images/image-36.png)
 
 ## Refining All Foreign Keys
 
@@ -1666,7 +1666,7 @@ Elements of a foreign key:
 * it often has the same name or a very similar name as the key from which it was copied
 * it usually uses the same or compatible field specifications as the key it references
 
-![Table Specifications for foreign keys](image-37.png)
+![Table Specifications for foreign keys](images/image-37.png)
 
 Since a foreign key is often based on another key’s definition, it can be treated like a replica in that sense.
 
@@ -1698,9 +1698,9 @@ The two types of participation are:
 
 **Optional:** There is no requirement for a related record to exist.
 
-![Relationship type](image-38.png)
+![Relationship type](images/image-38.png)
 
-![Amount of participation](image-39.png)
+![Amount of participation](images/image-39.png)
 
 ## Relationship-Level Integrity
 
@@ -1727,7 +1727,7 @@ There are two types of business rules:
 
 Database-oriented: This is a constraint that can be established within the logical design of the database. 
 
-![Data-oriented business rule](image-40.png)
+![Data-oriented business rule](images/image-40.png)
 
 Notice the use fo the range of values, as for this we only have places in the northwest
 
@@ -1748,7 +1748,7 @@ Business Rules Business rules under the field-specific category impose constrain
 
 For example, this rule only affects one element: Order dates cannot be earlier than May 16, 2018, which is the date our business was formed.
 
-![Field-specific business rule](image-41.png)
+![Field-specific business rule](images/image-41.png)
 
 This is making a change because we need to have canadian zip codes which use letters and numbers
 
@@ -1758,7 +1758,7 @@ Relationship-specific business rules impose constraints that affect the characte
 
 Example: Each class must have a minimum of five students, but cannot have more than 20.
 
-![Relationship-specific example](image-42.png)
+![Relationship-specific example](images/image-42.png)
 
 This shows we edit the participation in our erd
 
@@ -1796,7 +1796,7 @@ Determine what actions test the rule.
 
 Record the rule on a Business Rule Specifications sheet. 
 
-![Business Rule Specifications Sheet](image-43.png)
+![Business Rule Specifications Sheet](images/image-43.png)
 
 
 ### Defining and Establishing Relationship-Specific Business Rules
@@ -1818,9 +1818,9 @@ Establish the rule by modifying the appropriate relationship characteristics.
 
     An instructor must teach one class, but no more than eight classes.
 
-    ![Relationship constraint added](image-44.png)
+    ![Relationship constraint added](images/image-44.png)
 
-    ![Restrict deletion constraint imposed](image-46.png)
+    ![Restrict deletion constraint imposed](images/image-46.png)
 
 Determine what actions will test the rule. 
 
@@ -1830,11 +1830,11 @@ Determine what actions will test the rule.
 
 Record the rule on a Business Rule Specifications sheet.
 
-![Business rule specifications sheet](image-45.png)
+![Business rule specifications sheet](images/image-45.png)
 
 ## Validation Tables 
 
-![Validation table example](image-47.png)
+![Validation table example](images/image-47.png)
 
 Example: Any supplier we use must be based in one of the 11 contiguous western states, Alaska, or Hawaii.
 
@@ -1847,7 +1847,7 @@ Reviewing the Business Rule Specifications Sheets
 
 We then review our specification sheet. 
 
-![Finished Business Rule Specification worksheet](image-48.png)
+![Finished Business Rule Specification worksheet](images/image-48.png)
 
 
 
@@ -1880,28 +1880,28 @@ There are three types of views
 
 Data:
 
-![Single-Table Data View](image-49.png)
+![Single-Table Data View](images/image-49.png)
 
-![Single-Table Data View](image-50.png)
+![Single-Table Data View](images/image-50.png)
 
-![Multitable Data View](image-52.png)
+![Multitable Data View](images/image-52.png)
 
 
 Aggregate:
 
-![Aggregate View](image-53.png)
+![Aggregate View](images/image-53.png)
 
 Validation:
 
-![Validation View](image-54.png)
+![Validation View](images/image-54.png)
 
 Determining and Defining Views
 
 We will once again work with users and management to figure out what kind of views we're going to create.
 
-![Sample for what data we want in our view](image-55.png)
+![Sample for what data we want in our view](images/image-55.png)
 
-![View diagram](image-56.png)
+![View diagram](images/image-56.png)
 
 
 # Chapter 13
@@ -1979,7 +1979,7 @@ What not to do in database design.
 
 First do not is Flat File Design
 
-![Flat File Design](image-57.png)
+![Flat File Design](images/image-57.png)
 
 THis is just wrong on so many levels but multipart fields, duplicate fields, no true primary key, just so much wrong.
 
@@ -1987,7 +1987,7 @@ Spreadsheet Design
 
 This might be alright for stats and things like that as we have used excel before and pivot tables are in fact goated with that being said that does not mean it should be a way of storing data 
 
-![Spreadsheet Design](image-58.png)
+![Spreadsheet Design](images/image-58.png)
 
 We have duplicate fields, multipart fields, multivalued fields, and just difficult to use
 
