@@ -241,4 +241,40 @@ When data is loaded into an OLAP cube, it is stored and indexed using formats an
 
 We generally recommend that detailed, atomic information be loaded into a star schema; optional OLAP cubes are then populated from the star schema. For this reason, most dimensional modeling techniques in this book are couched in terms of a relational star schema.
 
-Stopped at page 46.
+The big takeaway of an OLAP cube is the logical implementation of it is still prevalent but with the increase of computers hardware they are not as needed.
+
+
+
+
+# Fact Tables for Measurements
+
+The fact table in a dimensional model stores the performance measurements resulting from an organization's business process events. You're fact represents a business measure. 
+Each row in a fact table corresponds to a measurement event such as the dollar sales, unit quantity of each product for example.
+
+The data on each row is at a specific level detail, referred to as the grain, such as one row per product sold on a sales transaction. 
+ 
+A core tenet is that all measurements rows in a fact table must be a the same grain so they all have to be as specific as the next if one row adds too much to the grain then it could effect the integrity of the data.
+
+Measurement event in the physical world has a one-to-one relationship to a single row in the corresponding fact table is a bedrock principle for dimensional modeling.
+
+Most useful facts are numeric such as dollar sales amount.
+
+
+Fact tables make up 90% of dimensional models
+
+
+Fact table grains fall into one of the three categories: transaction, periodic snapshot, and accumulating snapshot. 
+
+Transaction grain fact tables are the most common.
+
+Fact tables have two or more foreign keys to the connect the dimension tables, You access the fact table via the dimension tables joint to it
+
+Fact table generally has its own primary key composed of a subset of foreign keys called our lovely composite key. 
+
+Fact tables express many to many relationships
+
+Stopped at page 13 
+
+
+
+
