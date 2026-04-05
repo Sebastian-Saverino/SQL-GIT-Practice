@@ -273,8 +273,82 @@ Fact table generally has its own primary key composed of a subset of foreign key
 
 Fact tables express many to many relationships
 
-Stopped at page 13 
+Dim tables for Descriptive Context
+
+Dimension Tables is our descriptive context.
+
+Dimension tables contain the textual context associated with a business process measurement event.
+
+These are the 5 w's of our measurement 
+
+Each dimension table is defined by a single primary key.
+
+This serves as the basis for referential integrity with any given fact table to which it is joined.
+
+This is an example of where you would use a dimension attribute from a dim table.
+
+Example: When a user wants to see dollar sales by brand, brand must be available as a dimension attribute.
+
+Dim tables are the source of almost all contraints and report labels.
+
+This is a good example of how to decide whether a numeric value should be more associated with a fact table or a dimension table: When triaging operational source data, it is sometimes unclear whether a numeric data element is a fact or dimension attribute. ou often make the decision by asking whether the column is a measurement that takes on lots of values and participates in calculations (making it a fact) or is a discretely valued description that is more or less constant and participates in constraints and  ow labels (making it a dimensional attribute).
+
+The hierarchical descriptive information is stored redundantly in the spirit of ease of use and query performance. You should resist the perhaps habitual urge to normalize data by storing only the brand code in the product dimension and creating a separate brand lookup table, and likewise for the category description in a separate category lookup table.
+
+In some cases you want to resist that want to normalize your data for the sake of our queries performance and ease of use, but in the case we want to normalize our star schema we will create a more snowflake schema 
 
 
+![Star-vs-Snowflake](image-1.png)
+
+You should almost always trade off dimension table space for simplicity and accessibility.
 
 
+This book illustrates repeatedly that the most granular or atomic data has the most dimensionality. Atomic data that has not been aggregated is the most expressive data;
+
+To speak to the grain say we just want the sales by month 
+
+this is product + date
+
+now we can create a finer grain with saying we want the most sales by month by store
+
+product +  date + store
+
+
+There are four separate and distinct components to consider in the DW/BI environment: operational source systems, ETL system, data presentation area, and business intelligence applications.
+
+## Operational source systems
+
+THis is the system that captures the business transactions. 
+
+The main priorities of the source systems are processing performance and availability. Operational queries against source systems are narrow, one-record-at-a-time queries that are part of the normal transaction fl ow and severely restricted in their demands on the operational system.
+
+This is our OLTP. Or our data source 
+
+
+## Extract, Transform, Load (ETL)
+
+Our lovely extract, transform, load
+
+This is ETL. This is everything between that source and the BI tool.
+
+Extraction: reading and the understanding the source data then copying the data needed into the ETL system for further manipulation. This data is now in the data warehouse.
+
+There are a ton of different transformation to be made to the data. We can make sure to type the data correctly, correct spacing, formats issues. The job of this is to create better data integrity.
+
+We can also have metadata be engineered into this step as well.
+
+This whole paragraph is very important:
+
+The final step of the ETL process is the physical structuring and loading of data into the presentation area’s target dimensional models. Because the primary mission of the ETL system is to hand off the dimension and fact tables in the delivery step, these subsystems are critical. Many of these defined subsystems focus on dimension table processing, such as surrogate key assignments, code lookups to provide appropriate descriptions, splitting, or combining columns to present the appropriate data values, or joining underlying third normal form table structures into flattened denormalized dimensions. In contrast, fact tables are typically large and time consuming to load, but preparing them for the presentation area is typically straightforward. When the dimension and fact tables in a dimensional model have been updated, indexed, supplied with appropriate aggregates, and further quality assured, the business community is notified that the new data has been published.
+
+
+## Presentation Area to Support BI
+
+The presentation data area should be structured around business process measurement events. This approach naturally aligns with the operational source data capture systems. Dimensional models should correspond to physical data capture events; they should not be designed to deliver the report-of-the-day. This is where we want to focus on the dimensionality of our tables and creating that fact table.
+
+
+## Business Intelligence Applications
+
+By definition, all BI applications query the data in the DW/BI presentation area. Querying, obviously, is the whole point of using data for improved decision making. A BI application can be as simple as an ad hoc query tool or as complex as a sophisticated data mining or modeling application.
+
+This is where we start to query that data we had modeled in the presentation area.
