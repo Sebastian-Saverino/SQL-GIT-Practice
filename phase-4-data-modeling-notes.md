@@ -352,3 +352,16 @@ The presentation data area should be structured around business process measurem
 By definition, all BI applications query the data in the DW/BI presentation area. Querying, obviously, is the whole point of using data for improved decision making. A BI application can be as simple as an ad hoc query tool or as complex as a sophisticated data mining or modeling application.
 
 This is where we start to query that data we had modeled in the presentation area.
+
+Restaurant Metaphor for the Kimball Architecture
+
+
+ETL is the kitchen of a restaurant. 
+
+Data presentation and BI is the the front Dining room 
+Food
+Decor 
+Service
+Cost
+
+page 25
