@@ -369,3 +369,5 @@ Cost
 page 26
 
 I wanted to further speak on dbt how it uses a mart like structure, which is what I'm going to speak on next.
+
+I worked more with data modeling as I now need to fix my dbt models for my powerlifting database so that is going to be fun.
